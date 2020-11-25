@@ -1,0 +1,34 @@
+TODO:
+
+Make game working
+    - handle weird piece movements
+        - castling
+        - pawn back-cap
+        - pawn new piece-ification
+        - others?
+    - make making a turn possible
+        - something involving move function
+        - need some way to catch and redo illegal moves
+        -
+    - make some way to remove piece from board
+        - something in side of the move function???
+    - implement actual win condition?
+    - more?
+
+Make UI Working
+    - add draw function into square/board class
+    - make RunWindow actually have a function
+    - more?
+
+
+
+
+Networking
+    -??????
+    -????????
+    -??????????
+    -now I have perfect multiplayer chess game (pog face)
+
+
+Clean up my dogshit code before i spend half a year looking for a misplaced semi colon
+    - ^that
