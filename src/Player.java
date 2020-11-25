@@ -42,4 +42,9 @@ public class Player {
         return t;
     }
 
+    public void calculateVisibleSquares()
+    {
+
+    }
+
 }

@@ -13,6 +13,7 @@ Make game working
     - make some way to remove piece from board
         - something in side of the move function???
     - implement actual win condition?
+    - add apply fog
     - more?
 
 Make UI Working

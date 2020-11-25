@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Square {
     int row, column;
-    boolean color;
+    boolean color,isVisible;
     ChessPiece[] pieces;
     public Square(int row, int column, boolean color, ChessPiece[] pieces)
     {
@@ -38,6 +38,7 @@ public class Square {
             pieces[0]=null;
         }
     }
+
     public boolean hasAPiece()
     {
         return this.pieces[0]!=null;
