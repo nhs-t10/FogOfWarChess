@@ -6,37 +6,83 @@ public class Bishop extends ChessPiece{
     {
         super();
     }
-    public ArrayList<int[]> possibleMoves(Square[][]t)
+    public ArrayList<int[]> possibleMoves(Square[][]t)//this is very ugly
     {
-            ArrayList<int[]> posMoves = new ArrayList<>();
-            return posMoves;
+        ArrayList<int[]> posMoves = new ArrayList<>();
+        int row = this.currentPos.row;
+        int col = this.currentPos.column;
+        for(int i = 0; row+i < 8; i++)
+        {
+            for(int j = 0; col+j<8;j++)
+            {
+                if(t[row+i][col+j].hasAPiece())
+                {
+                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
+                    {
+                        posMoves.add(new int[]{row+i,col+j});
+                    }
+                    break;
+                }
+                posMoves.add(new int[]{row+i,col+j});
+            }
+            for(int j = 0; col+j >=0;j--)
+            {
+                if(t[row+i][col+j].hasAPiece())
+                {
+                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
+                    {
+                        posMoves.add(new int[]{row+i,col+j});
+                    }
+                    break;
+                }
+                posMoves.add(new int[]{row+i,col+j});
+            }
+        }
+        for(int i = 0; row+i >= 0; i--)
+        {
+            for(int j = 0; col+j<8;j++)
+            {
+                if(t[row+i][col+j].hasAPiece())
+                {
+                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
+                    {
+                        posMoves.add(new int[]{row+i,col+j});
+                    }
+                    break;
+                }
+                posMoves.add(new int[]{row+i,col+j});
+            }
+            for(int j = 0; col+j >=0;j--)
+            {
+                if(t[row+i][col+j].hasAPiece())
+                {
+                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
+                    {
+                        posMoves.add(new int[]{row+i,col+j});
+                    }
+                    break;
+                }
+                posMoves.add(new int[]{row+i,col+j});
+            }
+        }
+        return posMoves;
     }
 
     public Square[][] move(Square[][] t, int newRow, int newCol, ArrayList<int[]> posMoves)
     {
-        Square[][] backup = t;
-        if(Math.abs(newRow-this.currentPos.row)==Math.abs(newCol -this.currentPos.column))
+        for(int i = 0; i<posMoves.size();i++)
         {
-            for(int i = 1; i < Math.abs(this.currentPos.row-newRow);i++)
+            if(posMoves.get(i)[0]==newRow&&posMoves.get(i)[1]==newCol)
             {
-                if(t[this.currentPos.row][this.currentPos.column].hasAPiece())
+                if(posMoves.get(i)[2]==1)
                 {
-                    return backup;//illegal move!
+                    takePiece(t[newRow][newCol].pieces[0],newRow,newCol);
                 }
-            }
-            try{
-                t[newRow][newCol].addPiece(this,this.owner);
-                t[this.currentPos.row][this.currentPos.column].removePiece();
-                this.changeCurrentPosSquare(t[newRow][newCol]);
-                return t;
-            }catch(Exception e)
-            {
-                return backup;
+                t[newRow][newCol].pieces[0]=this;
+                t[this.currentPos.row][this.currentPos.column].pieces[0]=null;
             }
         }
-        //illegal move!
-
-        return backup;
+        return t;
 
     }
 }
