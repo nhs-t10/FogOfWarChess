@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Pawn extends ChessPiece{
     int direction, changeRow;
-    public Pawn()
+    public Pawn(Square startingPos, boolean color, int value)
     {
-        super();
+        super(startingPos,color,value);
         if(super.pieceColor)
         {
             direction=1;

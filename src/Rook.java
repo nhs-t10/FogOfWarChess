@@ -3,8 +3,9 @@ import java.util.ArrayList;
 
 public class Rook extends ChessPiece{
     Boolean canCastle;
-    public Rook()
+    public Rook(Square startingPos, boolean color, int value)
     {
+        super(startingPos,color,value);
         canCastle=true;
     }
     public ArrayList<int[]>possibleMoves(Square[][]t)//also very ugly

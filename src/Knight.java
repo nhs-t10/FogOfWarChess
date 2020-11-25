@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Knight extends ChessPiece{
 
-    public Knight()
+    public Knight(Square startingPos, boolean color, int value)
     {
-        super();
+        super(startingPos,color,value);
     }
     public ArrayList<int[]> possibleMoves(Square[][]t)
     {

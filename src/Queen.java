@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 
 public class Queen extends ChessPiece{
+
+    public Queen(Square startingPos, boolean color, int value)
+    {
+        super(startingPos,color,value);
+    }
+
     public Square[][] move(Square[][] t,int newRow, int newCol)
     {
         return null;
