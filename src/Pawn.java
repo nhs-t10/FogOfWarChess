@@ -66,28 +66,56 @@ public class Pawn extends ChessPiece{
     @Override
     public Square[][] move(Square[][] t, int newRow, int newCol, ArrayList<int[]>posMoves)//may need some way to claim that move is impossible?
     {
+        Square[][] backupT = t;
 
-        enPassantAble=false;
         try{
             if(t[this.currentPos.row][newCol].hasAPiece()&&t[this.currentPos.row][newCol].pieces[0] instanceof Pawn&&((Pawn)t[this.currentPos.row][newCol].pieces[0]).enPassantAble&&!t[newRow][newCol].hasAPiece()&&t[this.currentPos.row][newCol].pieces[0].pieceColor!=this.pieceColor&&(((this.currentPos.row==4&&newRow==5))||(this.currentPos.row==3&&newRow==2))){//just an apology for anyone who has to read this :)
                 t[this.currentPos.row][newCol].pieces[0].destroy(owner);
                 t[newRow][newCol].pieces[0]=this;
                 t[this.currentPos.row][this.currentPos.column].pieces[0]=null;
                 this.currentPos=t[newRow][newCol];
-            }
-
-            if(((this.currentPos.row==6&&direction==1)||(this.currentPos.row==0&&direction==-1)))
+            } else if(((this.currentPos.row==6&&direction==1)||(this.currentPos.row==0&&direction==-1)))
             {
 
                 return changePiece(t);
+            } else
+            {
+                for (int i = 0; i < posMoves.size(); i++) {
+                    if (posMoves.get(i)[0] == newRow && posMoves.get(i)[1] == newCol) {
+                        if (posMoves.get(i)[2] == 1) {
+                            takePiece(t[newRow][newCol].pieces[0], newRow, newCol);
+                        }
+                        t[newRow][newCol].pieces[0] = this;
+                        t[this.currentPos.row][this.currentPos.column].pieces[0] = null;
+                        currentPos = t[newRow][newCol];
+                    }
+                }
             }
-
         }catch(IllegalArgumentException ex)
         {
             enPassantAble=false;
+            return backupT;
+            //illegal move here????????????????????????
         }
 
-        return super.move(t,newRow,newCol,posMoves);
+
+        //move function :)
+
+
+        for(ChessPiece p: owner.pieces)
+        {
+            if(p instanceof Pawn)
+            {
+                ((Pawn) p).enPassantAble = false;
+            }
+        }
+        if(Math.abs(this.currentPos.row-newRow)==2)
+        {
+            enPassantAble=true;
+        }
+        return t;
+
+
 
     }
 

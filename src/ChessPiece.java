@@ -38,6 +38,13 @@ abstract class ChessPiece {
             //idk lol but i imagine something will eventually go here lmao
             return backupT;
         }
+        for(ChessPiece p: owner.pieces)
+        {
+            if(p instanceof Pawn)
+            {
+                ((Pawn) p).enPassantAble = false;
+            }
+        }
         return t;
     }
     abstract ArrayList<int[]> possibleMoves(Square[][] t);
