@@ -21,10 +21,14 @@ public class Pawn extends ChessPiece{
     public ArrayList<int[]> possibleMoves(Square[][] t)
     {
         ArrayList<int[]> posMoves = new ArrayList<>();
-        if(!(this.currentPos.row==7&&direction==1)&&!(this.currentPos.row==0&&direction==-1))
+        if(!(this.currentPos.row==7)&&!(this.currentPos.row==0))
         {
             if(!t[this.currentPos.row+direction][this.currentPos.column].hasAPiece()){
                 posMoves.add(new int[]{this.currentPos.row+direction,this.currentPos.column,0});
+            }
+            if((this.currentPos.row==6&&direction==-1)||(this.currentPos.row==1&&this.direction==1))
+            {
+                posMoves.add(new int[]{this.currentPos.row+2*direction,this.currentPos.column,0});
             }
             if(this.currentPos.column!=7)
             {
@@ -41,7 +45,7 @@ public class Pawn extends ChessPiece{
                 }
             }
 
-        }
+        }//en passant section run while you still can :)
         if((this.currentPos.row==4&&direction==1)||(this.currentPos.row==3&&direction==-1))
         {
             if(this.currentPos.column!=0&&!t[this.currentPos.row+direction][this.currentPos.column-1].hasAPiece()&&(t[this.currentPos.row][this.currentPos.column-1].hasAPiece()&&t[this.currentPos.row][this.currentPos.column-1].pieces[0].pieceColor!=this.pieceColor&&(t[this.currentPos.row][this.currentPos.column-1].pieces[0] instanceof Pawn&&((Pawn)t[this.currentPos.row][this.currentPos.column-1].pieces[0]).enPassantAble)))
@@ -65,12 +69,11 @@ public class Pawn extends ChessPiece{
 
         enPassantAble=false;
         try{
-            if(this.currentPos.row==4&&newRow==5&&t[this.currentPos.row][newCol].hasAPiece()&&t[this.currentPos.row][newCol].pieces[0] instanceof Pawn&&((Pawn)t[this.currentPos.row][newCol].pieces[0]).enPassantAble&&!t[newRow][newCol].hasAPiece()){
-                //trigger en passant omegalul
-            }
-            if(this.currentPos.row==3&&direction==1&&newRow==3)
-            {
-
+            if(t[this.currentPos.row][newCol].hasAPiece()&&t[this.currentPos.row][newCol].pieces[0] instanceof Pawn&&((Pawn)t[this.currentPos.row][newCol].pieces[0]).enPassantAble&&!t[newRow][newCol].hasAPiece()&&t[this.currentPos.row][newCol].pieces[0].pieceColor!=this.pieceColor&&(((this.currentPos.row==4&&newRow==5))||(this.currentPos.row==3&&newRow==2))){//just an apology for anyone who has to read this :)
+                t[this.currentPos.row][newCol].pieces[0].destroy(owner);
+                t[newRow][newCol].pieces[0]=this;
+                t[this.currentPos.row][this.currentPos.column].pieces[0]=null;
+                this.currentPos=t[newRow][newCol];
             }
 
             if(((this.currentPos.row==6&&direction==1)||(this.currentPos.row==0&&direction==-1)))

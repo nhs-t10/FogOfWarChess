@@ -2,17 +2,17 @@ TODO:
 
 Make game working
     - handle weird piece movements
-        - pawn back-cap
-        - pawn new piece-ification
+        - pawn back-cap -> done i think
+        - pawn new piece-ification -> needs work but for now i dont want to touch cuz its annoying but i do have the groundwork in place so get fucked :)
         - others?
     - make making a turn possible
-        - something involving move function
-        - need some way to catch and redo illegal moves
+        - something involving move function <- done?
+        - need some way to catch and redo illegal moves <- this this this thsit hsit shti sthi this this this this this this this this this this this this this
         -
     - make some way to remove piece from board
-        - something in side of the move function???
-    - implement actual win condition?
-    - add apply fog
+        - something in side of the move function??? <- done?
+    - implement actual win condition? <-eh
+    - add apply fog <- nomegalul
     - more?
 
 Make UI Working

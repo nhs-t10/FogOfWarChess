@@ -21,17 +21,22 @@ abstract class ChessPiece {
         this.representation=representation;
     }
     Square[][] move(Square[][] t,int newRow, int newCol,ArrayList<int[]>posMoves){
-        for(int i = 0; i<posMoves.size();i++)
-        {
-            if(posMoves.get(i)[0]==newRow&&posMoves.get(i)[1]==newCol)
-            {
-                if(posMoves.get(i)[2]==1)
-                {
-                    takePiece(t[newRow][newCol].pieces[0],newRow,newCol);
+        Square[][] backupT = t;
+        try {
+            for (int i = 0; i < posMoves.size(); i++) {
+                if (posMoves.get(i)[0] == newRow && posMoves.get(i)[1] == newCol) {
+                    if (posMoves.get(i)[2] == 1) {
+                        takePiece(t[newRow][newCol].pieces[0], newRow, newCol);
+                    }
+                    t[newRow][newCol].pieces[0] = this;
+                    t[this.currentPos.row][this.currentPos.column].pieces[0] = null;
+                    currentPos = t[newRow][newCol];
                 }
-                t[newRow][newCol].pieces[0]=this;
-                t[this.currentPos.row][this.currentPos.column].pieces[0]=null;
             }
+        }catch(Exception e)
+        {
+            //idk lol but i imagine something will eventually go here lmao
+            return backupT;
         }
         return t;
     }
