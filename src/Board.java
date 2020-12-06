@@ -16,10 +16,15 @@ public class Board {
         {
             for(int j = 0; j<8; j++)
             {
-                tiles[i][j]=new Square(8-i,j+'A',((i*8+j)%2)==0,new ChessPiece[]{});
+                tiles[i][j]=new Square(8-i,j+'A',((i*8+j)%2)==0);
             }
         }
         this.tiles = tiles;
+    }
+    public void setPlayers(Player white, Player black)
+    {
+        p1=white;
+        p2=black;
     }
     public void setBoard()
     {
@@ -47,6 +52,7 @@ public class Board {
                 " |_____|_____|_____|_____|_____|_____|_____|_____|" +"\n",
 
         };
+        stringBoard=chessBoard;
         //¡ is pawn, █ is rook, i is bishop, Г is knight, K is king, Q is queen
     }
     public Square[][] getTiles()
@@ -62,10 +68,16 @@ public class Board {
         {
             for(int j = 0; j < 8; j++)
             {
+                char addMe;
                 if(tiles[i][j].hasAPiece())
-                {//god i hate doing char stuff but here we are... again :(
-                    stringBoard[3+i]=stringBoard[3+i].substring(0,4+6*j)+tiles[i][j].pieces[0].code+stringBoard[3+i].substring(5+6*j);
+                {
+                    addMe= tiles[i][j].pieces[0].code;
+                }else
+                {
+                    addMe=' ';
                 }
+                stringBoard[3+2*i]=stringBoard[3+2*i].substring(0,4+6*j)+addMe+stringBoard[3+2*i].substring(5+6*j);
+
             }
         }
         //¡ is pawn, █ is rook, i is bishop, Г is knight, K is king, Q is queen
@@ -74,6 +86,7 @@ public class Board {
         {
             s+=ss;
         }
+        System.out.println(s);
         return s;
     }
 

@@ -16,37 +16,37 @@ public class Player {
     public Square[][] placePieces(Square[][] t)
     {
         if(color){
-            t[0][0].addPiece(new Rook(t[0][0],color),this);
-            t[0][1].addPiece(new Knight(t[0][1],color),this);
-            t[0][2].addPiece(new Bishop(t[0][2],color),this);
-            t[0][3].addPiece(new Queen(t[0][3],color),this);
-            t[0][4].addPiece(new King(t[0][4],color),this);
-            t[0][5].addPiece(new Bishop(t[0][5],color),this);
-            t[0][6].addPiece(new Knight(t[0][6],color),this);
-            t[0][7].addPiece(new Rook(t[0][7],color),this);
+            t[0][0].addPiece(new Rook(t[0][0],color,'█'),this);
+            t[0][1].addPiece(new Knight(t[0][1],color, 'Г'),this);
+            t[0][2].addPiece(new Bishop(t[0][2],color, 'i'),this);
+            t[0][3].addPiece(new Queen(t[0][3],color,'Q'),this);
+            t[0][4].addPiece(new King(t[0][4],color, 'K'),this);
+            t[0][5].addPiece(new Bishop(t[0][5],color, 'i'),this);
+            t[0][6].addPiece(new Knight(t[0][6],color, 'Г'),this);
+            t[0][7].addPiece(new Rook(t[0][7],color,'█'),this);
 
             for(int i = 0; i < 8; i++)
             {
-                t[1][i].addPiece(new Pawn(t[1][i],color),this);
+                t[1][i].addPiece(new Pawn(t[1][i],color, '¡'),this);
                 pieces.add(t[0][i].pieces[0]);
                 pieces.add(t[1][i].pieces[0]);
             }
         }else
         {
-            t[8][0].addPiece(new Rook(t[8][0],color),this);
-            t[8][1].addPiece(new Knight(t[8][1],color),this);
-            t[8][2].addPiece(new Bishop(t[8][2],color),this);
-            t[8][3].addPiece(new King(t[8][3],color),this);
-            t[8][4].addPiece(new Queen(t[8][4],color),this);
-            t[8][5].addPiece(new Bishop(t[8][5],color),this);
-            t[8][6].addPiece(new Knight(t[8][6],color),this);
-            t[8][7].addPiece(new Rook(t[8][7],color),this);
+            t[7][0].addPiece(new Rook(t[7][0],color,'█'),this);
+            t[7][1].addPiece(new Knight(t[7][1],color,'Г'),this);
+            t[7][2].addPiece(new Bishop(t[7][2],color,'i'),this);
+            t[7][3].addPiece(new King(t[7][3],color,'K'),this);
+            t[7][4].addPiece(new Queen(t[7][4],color,'Q'),this);
+            t[7][5].addPiece(new Bishop(t[7][5],color,'i'),this);
+            t[7][6].addPiece(new Knight(t[7][6],color,'Г'),this);
+            t[7][7].addPiece(new Rook(t[7][7],color,'█'),this);
 
             for(int i = 0; i < 8; i++)
             {
-                t[7][i].addPiece(new Pawn(t[7][i],color),this);
+                t[6][i].addPiece(new Pawn(t[7][i],color,'¡'),this);
+                pieces.add(t[6][i].pieces[0]);
                 pieces.add(t[7][i].pieces[0]);
-                pieces.add(t[8][i].pieces[0]);
             }
         }
         return t;
@@ -88,5 +88,6 @@ public class Player {
         }
         System.out.println("that's a correct mvoe but pronbably a bad one AHAHAHAHXH >:D");
     }
+
 
 }

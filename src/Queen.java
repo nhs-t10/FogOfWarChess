@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Queen extends ChessPiece{
 
-    public Queen(Square startingPos, boolean color)
+    public Queen(Square startingPos, boolean color, char code)
     {
-        super(startingPos,color,9,'Q',"qn");
+        super(startingPos,color,9,code,"qn");
     }
 
     public Square[][] move(Square[][] t,int newRow, int newCol)

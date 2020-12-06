@@ -4,9 +4,9 @@ public class Square {
     int row, column;
     boolean color,isVisible;
     ChessPiece[] pieces;
-    public Square(int row, int column, boolean color, ChessPiece[] pieces)
+    public Square(int row, int column, boolean color)
     {
-        this.pieces=pieces;
+        this.pieces= new ChessPiece[2];
         this.row = row;
         this.column=column;
         this.color=color;
@@ -41,6 +41,6 @@ public class Square {
 
     public boolean hasAPiece()
     {
-        return this.pieces[0]!=null;
+        return this.pieces.length>0&&this.pieces[0]!=null;
     }
 }

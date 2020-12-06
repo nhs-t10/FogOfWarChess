@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Bishop extends ChessPiece{
     Player owner;
-    public Bishop(Square startingPos, boolean color)
+    public Bishop(Square startingPos, boolean color, char code)
     {
-        super(startingPos, color,3,'i',"bs");
+        super(startingPos, color,3,code,"bs");
 
 
     }

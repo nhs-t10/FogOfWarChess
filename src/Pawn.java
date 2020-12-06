@@ -4,9 +4,9 @@ public class Pawn extends ChessPiece{
     boolean firstMove;
     boolean enPassantAble;
     int direction, changeRow;
-    public Pawn(Square startingPos, boolean color)
+    public Pawn(Square startingPos, boolean color, char code)
     {
-        super(startingPos,color,1,'¡',"pn");
+        super(startingPos,color,1,code,"pn");
         if(super.pieceColor)
         {
             direction=1;
@@ -99,7 +99,7 @@ public class Pawn extends ChessPiece{
         }
 
 
-        //move function :)
+        //move function
 
 
         for(ChessPiece p: owner.pieces)
