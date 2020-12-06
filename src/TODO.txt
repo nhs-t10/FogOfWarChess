@@ -2,7 +2,6 @@ TODO:
 
 Make game working
     - handle weird piece movements
-        - castling
         - pawn back-cap
         - pawn new piece-ification
         - others?

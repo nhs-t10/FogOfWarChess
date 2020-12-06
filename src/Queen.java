@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Queen extends ChessPiece{
 
-    public Queen(Square startingPos, boolean color, int value)
+    public Queen(Square startingPos, boolean color)
     {
-        super(startingPos,color,value);
+        super(startingPos,color,9,'Q',"qn");
     }
 
     public Square[][] move(Square[][] t,int newRow, int newCol)
@@ -123,24 +123,4 @@ public class Queen extends ChessPiece{
         }
         return posMoves;
     }
-
-
-    public Square[][] move(Square[][] t, int newRow, int newCol, ArrayList<int[]> posMoves)
-    {
-        for(int i = 0; i<posMoves.size();i++)
-        {
-            if(posMoves.get(i)[0]==newRow&&posMoves.get(i)[1]==newCol)
-            {
-                if(posMoves.get(i)[2]==1)
-                {
-                    takePiece(t[newRow][newCol].pieces[0],newRow,newCol);
-                }
-                t[newRow][newCol].pieces[0]=this;
-                t[this.currentPos.row][this.currentPos.column].pieces[0]=null;
-            }
-        }
-        return t;
-
-    }
-
 }
