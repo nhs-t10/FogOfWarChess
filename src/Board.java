@@ -16,10 +16,21 @@ public class Board {
         {
             for(int j = 0; j<8; j++)
             {
-                tiles[i][j]=new Square(8-i,j+'A',((i*8+j)%2)==0);
+                tiles[i][j]=new Square(i,j,((i*8+j)%2)==0);
             }
         }
         this.tiles = tiles;
+    }
+    public void changeTiles(Square[][]t)
+    {
+        tiles=t;
+    }
+    public void testingPurposes()
+    {
+        for(int i = 0; i < 8;i++)
+        {
+            tiles[0][i].pieces=new ChessPiece[2];
+        }
     }
     public void setPlayers(Player white, Player black)
     {

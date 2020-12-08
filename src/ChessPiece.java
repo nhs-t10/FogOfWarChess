@@ -12,24 +12,24 @@ abstract class ChessPiece {
     {
 
     }
-    public ChessPiece(Square startingPos, boolean color, int value, char code,String representation)
+    public ChessPiece(Square startingPos, boolean color, int value, char code,String representation, Player owner)
     {
         pieceColor=color;
         currentPos=startingPos;
         points=value;
         this.code=code;
         this.representation=representation;
+        this.owner = owner;
     }
     Square[][] move(Square[][] t,int newRow, int newCol,ArrayList<int[]>posMoves){
+        System.out.println("moving");
         Square[][] backupT = t;
         try {
             for (int i = 0; i < posMoves.size(); i++) {
                 if (posMoves.get(i)[0] == newRow && posMoves.get(i)[1] == newCol) {
-                    if (posMoves.get(i)[2] == 1) {
-                        takePiece(t[newRow][newCol].pieces[0], newRow, newCol);
-                    }
+                    System.out.println("found it");
                     t[newRow][newCol].pieces[0] = this;
-                    t[this.currentPos.row][this.currentPos.column].pieces[0] = null;
+                    t[this.currentPos.row][this.currentPos.column].pieces = new ChessPiece[2];
                     currentPos = t[newRow][newCol];
                 }
             }
@@ -54,7 +54,9 @@ abstract class ChessPiece {
 
     public int destroy(Player attacker)
     {
+
         return 0; //change this
+
     }
     public void changeCurrentPosSquare(Square s)
     {

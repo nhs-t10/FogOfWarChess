@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class Rook extends ChessPiece{
     Boolean canCastle;
-    public Rook(Square startingPos, boolean color, char code)
+    public Rook(Square startingPos, boolean color, char code, Player owner)
     {
-        super(startingPos,color,5,code,"rk");
+        super(startingPos,color,5,code,"rk",owner);
         canCastle=true;
     }
     public ArrayList<int[]>possibleMoves(Square[][]t)//also very ugly
@@ -14,7 +14,9 @@ public class Rook extends ChessPiece{
         int row = this.currentPos.row;
         int col = this.currentPos.column;
 
-        for(int i = 0; i+row<8;i++)
+        System.out.println(row+", "+col);
+
+        for(int i = 1; i+row<8;i++)
         {
             if(t[row+i][col].hasAPiece())
             {
@@ -26,7 +28,7 @@ public class Rook extends ChessPiece{
             }
             posMoves.add(new int[]{row+i,col});
         }
-        for(int i = 0; i+row>=0;i--)
+        for(int i = -1; i+row>=0;i--)
         {
             if(t[row+i][col].hasAPiece())
             {
@@ -38,7 +40,7 @@ public class Rook extends ChessPiece{
             }
             posMoves.add(new int[]{row+i,col});
         }
-        for(int i = 0; i+col<8;i++)
+        for(int i = 1; i+col<8;i++)
         {
             if(t[row][col+i].hasAPiece())
             {
@@ -50,7 +52,7 @@ public class Rook extends ChessPiece{
             }
             posMoves.add(new int[]{row,col+i});
         }
-        for(int i = 0; i+col>=0;i--)
+        for(int i = -1; i+col>=0;i--)
         {
             if(t[row][col+i].hasAPiece())
             {
@@ -62,6 +64,7 @@ public class Rook extends ChessPiece{
             }
             posMoves.add(new int[]{row,col+i});
         }
+        System.out.println(posMoves.size()+"posmoves size");
         return posMoves;
     }
 
@@ -72,12 +75,10 @@ public class Rook extends ChessPiece{
         {
             if(posMoves.get(i)[0]==newRow&&posMoves.get(i)[1]==newCol)
             {
-                if(posMoves.get(i)[2]==1)
-                {
-                    takePiece(t[newRow][newCol].pieces[0],newRow,newCol);
-                }
+
                 t[newRow][newCol].pieces[0]=this;
-                t[this.currentPos.row][this.currentPos.column].pieces[0]=null;
+                t[this.currentPos.row][this.currentPos.column].pieces=new ChessPiece[2];
+                this.currentPos=t[newRow][newCol];
             }
         }
         return t;

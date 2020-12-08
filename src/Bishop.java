@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Bishop extends ChessPiece{
     Player owner;
-    public Bishop(Square startingPos, boolean color, char code)
+    public Bishop(Square startingPos, boolean color, char code,Player owner)
     {
-        super(startingPos, color,3,code,"bs");
+        super(startingPos, color,3,code,"bs",owner);
 
 
     }
@@ -13,59 +13,68 @@ public class Bishop extends ChessPiece{
         ArrayList<int[]> posMoves = new ArrayList<>();
         int row = this.currentPos.row;
         int col = this.currentPos.column;
-        for(int i = 0; row+i < 8; i++)
+
+        for(int i =1; i < 8;i++)
         {
-            for(int j = 0; col+j<8;j++)
+            if(row+i<8&&col+i<8&&!t[row+i][col+i].hasAPiece())
             {
-                if(t[row+i][col+j].hasAPiece())
-                {
-                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
-                    {
-                        posMoves.add(new int[]{row+i,col+j});
-                    }
-                    break;
-                }
-                posMoves.add(new int[]{row+i,col+j});
-            }
-            for(int j = 0; col+j >=0;j--)
+                posMoves.add(new int[]{row+i,col+i});
+            }else
             {
-                if(t[row+i][col+j].hasAPiece())
+                if(row+i<8&&col+i<8&&t[row+i][col+i].hasAPiece()&&t[row+i][col+i].pieces[0].pieceColor!=this.pieceColor)
                 {
-                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
-                    {
-                        posMoves.add(new int[]{row+i,col+j});
-                    }
-                    break;
+                    posMoves.add(new int[]{row+i,col+i});
                 }
-                posMoves.add(new int[]{row+i,col+j});
+                break;
             }
         }
-        for(int i = 0; row+i >= 0; i--)
+        for(int i =1; i < 8;i++)
         {
-            for(int j = 0; col+j<8;j++)
+            if(row+i<8&&col-i>-1&&!t[row+i][col-i].hasAPiece())
             {
-                if(t[row+i][col+j].hasAPiece())
-                {
-                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
-                    {
-                        posMoves.add(new int[]{row+i,col+j});
-                    }
-                    break;
-                }
-                posMoves.add(new int[]{row+i,col+j});
-            }
-            for(int j = 0; col+j >=0;j--)
+                posMoves.add(new int[]{row+i,col-i});
+            }else
             {
-                if(t[row+i][col+j].hasAPiece())
+                if(row+i<8&&col-i>-1&&t[row+i][col-i].hasAPiece()&&t[row+i][col-i].pieces[0].pieceColor!=this.pieceColor)
                 {
-                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
-                    {
-                        posMoves.add(new int[]{row+i,col+j});
-                    }
-                    break;
+                    posMoves.add(new int[]{row+i,col-i});
                 }
-                posMoves.add(new int[]{row+i,col+j});
+                break;
             }
+        }
+        for(int i =1; i < 8;i++)
+        {
+            if(row-i>-1&&col+i<8&&!t[row-i][col+i].hasAPiece())
+            {
+                posMoves.add(new int[]{row-i,col+i});
+            }else
+            {
+                if(row-i>-1&&col+i<8&&t[row-i][col+i].hasAPiece()&&t[row-i][col+i].pieces[0].pieceColor!=this.pieceColor)
+                {
+                    posMoves.add(new int[]{row-i,col+i});
+                }
+                break;
+            }
+        }
+        for(int i =1; i < 8;i++)
+        {
+            if(row-i>-1&&col-i>-1&&!t[row-i][col-i].hasAPiece())
+            {
+                posMoves.add(new int[]{row-i,col-i});
+            }else
+            {
+                if(row-i>-1&&col-i>-1&&t[row-i][col-i].hasAPiece()&&t[row-i][col-i].pieces[0].pieceColor!=this.pieceColor)
+                {
+                    posMoves.add(new int[]{row-i,col-i});
+                }
+                break;
+            }
+        }
+
+        System.out.println("posmoves"+posMoves.size());
+        for(int[]i: posMoves)
+        {
+            System.out.println(i[0]+", "+i[1]+" <- those are the moves I found omegalul");
         }
         return posMoves;
     }

@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class King extends ChessPiece {
     public Boolean canCastle = true;
-    public King(Square startingPos, boolean color, char code)
+    public King(Square startingPos, boolean color, char code,Player owner)
     {
-        super(startingPos,color,1000,code,"kn");
+        super(startingPos,color,1000,code,"kn",owner);
     }
     public ArrayList<int[]> possibleMoves(Square[][]t){//why is this so ugly why did I do this oh the humanity oh the pain
         ArrayList<int[]> posMoves = new ArrayList<>();

@@ -10,12 +10,14 @@ public class Square {
         this.row = row;
         this.column=column;
         this.color=color;
+//        System.out.println("new square with "+column+" as the column");
     }
     public void addPiece(ChessPiece p,Player player)
     {
         if(!hasAPiece())
         {
             pieces[0]=p;
+//            System.out.println("added a new piece, row="+row+" column="+column);
         }else
         {
             if(pieces[0].pieceColor==player.color)

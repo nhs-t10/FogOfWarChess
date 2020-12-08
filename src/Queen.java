@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Queen extends ChessPiece{
 
-    public Queen(Square startingPos, boolean color, char code)
+    public Queen(Square startingPos, boolean color, char code,Player owner)
     {
-        super(startingPos,color,9,code,"qn");
+        super(startingPos,color,9,code,"qn",owner);
     }
 
     public Square[][] move(Square[][] t,int newRow, int newCol)
@@ -19,7 +19,7 @@ public class Queen extends ChessPiece{
         int row = this.currentPos.row;
         int col = this.currentPos.column;
 
-        for(int i = 0; i+row<8;i++)
+        for(int i = 1; i+row<8;i++)
         {
             if(t[row+i][col].hasAPiece())
             {
@@ -31,7 +31,7 @@ public class Queen extends ChessPiece{
             }
             posMoves.add(new int[]{row+i,col});
         }
-        for(int i = 0; i+row>=0;i--)
+        for(int i = -1; i+row>=0;i--)
         {
             if(t[row+i][col].hasAPiece())
             {
@@ -43,7 +43,7 @@ public class Queen extends ChessPiece{
             }
             posMoves.add(new int[]{row+i,col});
         }
-        for(int i = 0; i+col<8;i++)
+        for(int i = 1; i+col<8;i++)
         {
             if(t[row][col+i].hasAPiece())
             {
@@ -55,7 +55,7 @@ public class Queen extends ChessPiece{
             }
             posMoves.add(new int[]{row,col+i});
         }
-        for(int i = 0; i+col>=0;i--)
+        for(int i = -1; i+col>=0;i--)
         {
             if(t[row][col+i].hasAPiece())
             {
@@ -67,58 +67,60 @@ public class Queen extends ChessPiece{
             }
             posMoves.add(new int[]{row,col+i});
         }
-        for(int i = 0; row+i < 8; i++)
+        for(int i =1; i < 8;i++)
         {
-            for(int j = 0; col+j<8;j++)
+            if(row+i<8&&col+i<8&&!t[row+i][col+i].hasAPiece())
             {
-                if(t[row+i][col+j].hasAPiece())
-                {
-                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
-                    {
-                        posMoves.add(new int[]{row+i,col+j});
-                    }
-                    break;
-                }
-                posMoves.add(new int[]{row+i,col+j});
-            }
-            for(int j = 0; col+j >=0;j--)
+                posMoves.add(new int[]{row+i,col+i});
+            }else
             {
-                if(t[row+i][col+j].hasAPiece())
+                if(row+i<8&&col+i<8&&t[row+i][col+i].hasAPiece()&&t[row+i][col+i].pieces[0].pieceColor!=this.pieceColor)
                 {
-                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
-                    {
-                        posMoves.add(new int[]{row+i,col+j});
-                    }
-                    break;
+                    posMoves.add(new int[]{row+i,col+i});
                 }
-                posMoves.add(new int[]{row+i,col+j});
+                break;
             }
         }
-        for(int i = 0; row+i >= 0; i--)
+        for(int i =1; i < 8;i++)
         {
-            for(int j = 0; col+j<8;j++)
+            if(row+i<8&&col-i>-1&&!t[row+i][col-i].hasAPiece())
             {
-                if(t[row+i][col+j].hasAPiece())
+                posMoves.add(new int[]{row+i,col-i});
+            }else
+            {
+                if(row+i<8&&col-i>-1&&t[row+i][col-i].hasAPiece()&&t[row+i][col-i].pieces[0].pieceColor!=this.pieceColor)
                 {
-                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
-                    {
-                        posMoves.add(new int[]{row+i,col+j});
-                    }
-                    break;
+                    posMoves.add(new int[]{row+i,col-i});
                 }
-                posMoves.add(new int[]{row+i,col+j});
+                break;
             }
-            for(int j = 0; col+j >=0;j--)
+        }
+        for(int i =1; i < 8;i++)
+        {
+            if(row-i>-1&&col+i<8&&!t[row-i][col+i].hasAPiece())
             {
-                if(t[row+i][col+j].hasAPiece())
+                posMoves.add(new int[]{row-i,col+i});
+            }else
+            {
+                if(row-i>-1&&col+i<8&&t[row-i][col+i].hasAPiece()&&t[row-i][col+i].pieces[0].pieceColor!=this.pieceColor)
                 {
-                    if(t[row+i][col+j].pieces[0].pieceColor!=this.pieceColor)
-                    {
-                        posMoves.add(new int[]{row+i,col+j});
-                    }
-                    break;
+                    posMoves.add(new int[]{row-i,col+i});
                 }
-                posMoves.add(new int[]{row+i,col+j});
+                break;
+            }
+        }
+        for(int i =1; i < 8;i++)
+        {
+            if(row-i>-1&&col-i>-1&&!t[row-i][col-i].hasAPiece())
+            {
+                posMoves.add(new int[]{row-i,col-i});
+            }else
+            {
+                if(row-i>-1&&col-i>-1&&t[row-i][col-i].hasAPiece()&&t[row-i][col-i].pieces[0].pieceColor!=this.pieceColor)
+                {
+                    posMoves.add(new int[]{row-i,col-i});
+                }
+                break;
             }
         }
         return posMoves;
