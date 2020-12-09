@@ -19,7 +19,7 @@ public class RunGame {
 //            }
 //            System.out.println();
 //        }
-        while(!isGameOver(me)&&!isGameOver(notMe))
+        while(isGameOver(chessBoard.getTiles()))
         {
             chessBoard.changeTiles(recursiveMove(me,chessBoard));
             chessBoard.changeTiles(recursiveMove(notMe,chessBoard));
@@ -27,18 +27,20 @@ public class RunGame {
 
         chessBoard.sendBoardConsole();
     }
-    public static boolean isGameOver(Player p)
+    public static boolean isGameOver(Square t[][])
     {
-        for(ChessPiece pee: p.pieces)
+        int i = 0;
+        for(int j = 0; j < 8; j++)
         {
-            if(pee instanceof King)
+            for(int k = 0; k < 8; k++)
             {
-                System.out.println(p.color +" still has a king?");
-                return false;
+                if(t[j][k].hasAPiece()&&t[j][k].pieces[0] instanceof King)
+                {
+                    i++;
+                }
             }
         }
-        System.out.println("----------no king found---------------");
-        return true;
+        return i==2;
     }
     public static Square[][] recursiveMove(Player p, Board b) {
         Board backup = b;

@@ -42,7 +42,7 @@ public class Board {
           tiles = p1.placePieces(tiles);
           tiles = p2.placePieces(tiles);
         String[] chessBoard = new String[]{
-                "chess"+"\n",
+                "chess      P1 points (white):     P2 points (black)"+"\n",
                 "    1     2     3     4     5     6     7     8"+"\n",
                 "  _____ _____ _____ _____ _____ _____ _____ _____"+"\n",
                 "A|     |     |     |     |     |     |     |     |" +"\n",
