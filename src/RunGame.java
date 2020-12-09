@@ -24,8 +24,7 @@ public class RunGame {
             chessBoard.changeTiles(recursiveMove(me,chessBoard));
             chessBoard.changeTiles(recursiveMove(notMe,chessBoard));
         }
-
-        chessBoard.sendBoardConsole();
+        
     }
     public static boolean isGameOver(Square t[][])
     {
