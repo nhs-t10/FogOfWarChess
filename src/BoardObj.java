@@ -1,11 +1,11 @@
 import java.util.Map;
 
-public class Board {
+public class BoardObj {
     boolean usingUI;
     String[] stringBoard;
     public Square[][]tiles;
     Player p1,p2;
-    public Board(Boolean ui)//0 is white btw but it doesn't really matter lol
+    public BoardObj(Boolean ui)//0 is white btw but it doesn't really matter lol
     {
         usingUI=ui;
         p1 = new Player(true,this);

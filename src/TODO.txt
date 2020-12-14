@@ -17,7 +17,7 @@ Make game working
 
 Make UI Working
     - add draw function into square/board class
-    - make RunWindow actually have a function
+    - make DrawWindow actually have a function
     - more?
 
 

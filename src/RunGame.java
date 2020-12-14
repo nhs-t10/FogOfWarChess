@@ -2,7 +2,7 @@ public class RunGame {
 
     public static void main(String[]args)
     {
-        Board chessBoard = new Board(false);
+        BoardObj chessBoard = new BoardObj(false);
         Player me = new Player(true,chessBoard);
         Player notMe = new Player(false,chessBoard);
         chessBoard.setBoard();
@@ -24,7 +24,7 @@ public class RunGame {
             chessBoard.changeTiles(recursiveMove(me,chessBoard));
             chessBoard.changeTiles(recursiveMove(notMe,chessBoard));
         }
-        
+
     }
     public static boolean isGameOver(Square t[][])
     {
@@ -41,8 +41,8 @@ public class RunGame {
         }
         return i==2;
     }
-    public static Square[][] recursiveMove(Player p, Board b) {
-        Board backup = b;
+    public static Square[][] recursiveMove(Player p, BoardObj b) {
+        BoardObj backup = b;
         b.sendBoardConsole();
         try {
             b.changeTiles(p.makeMoveText());

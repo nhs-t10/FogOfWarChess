@@ -4,9 +4,9 @@ import java.util.Scanner;
 public class Player {
     int score;
     boolean color;
-    Board board;
+    BoardObj board;
     ArrayList<ChessPiece> pieces = new ArrayList<>();
-    public Player(boolean color, Board b)//true is white
+    public Player(boolean color, BoardObj b)//true is white
     {
         score = 0;
         board=b;
