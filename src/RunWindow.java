@@ -10,13 +10,18 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.Image;
+import javax.swing.text.html.ImageView;
+import java.awt.*;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class RunWindow extends Application {
 
     final int X_DIM = 1500;
     final int Y_DIM = 800; //750 is height of stuff in y :)
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
         //Creating a Path
 
 
@@ -31,6 +36,8 @@ public class RunWindow extends Application {
         layout.setMargin(boardAreaGrid,new Insets(25,25,25,25));
         layout.setMargin(additionalInfoGrid,new Insets(25,25,25,25));
 
+        FileInputStream file = new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badPawnWhite.jpg");
+        Image image = new Image(file);
 
 
         boardAreaGrid.add(whitePieces,0,0,1,1);
@@ -58,7 +65,7 @@ public class RunWindow extends Application {
         Group root = new Group();
 
         //Creating a scene object
-        Scene scene = new Scene(layout, X_DIM , Y_DIM, Color.rgb(215, 245, 198));
+        Scene scene = new Scene(layout, X_DIM , Y_DIM/*, Color.rgb(215, 245, 198)*/);
 
         //Setting title to the Stage
         stage.setTitle("chessboard coming soon");
