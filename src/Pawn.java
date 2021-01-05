@@ -1,3 +1,6 @@
+import javafx.scene.image.Image;
+
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 public class Pawn extends ChessPiece{
@@ -7,6 +10,7 @@ public class Pawn extends ChessPiece{
     public Pawn(Square startingPos, boolean color, char code,Player owner)
     {
         super(startingPos,color,1,code,"pn",owner);
+
         if(super.pieceColor)
         {
             direction=1;
@@ -125,5 +129,8 @@ public class Pawn extends ChessPiece{
 
 
     }
+
+
+
 
 }

@@ -13,6 +13,17 @@ public class Player {
         this.color=color;
     }
 
+    public void removePiece(int deadRow, int deadCol)
+    {
+        for(ChessPiece p: pieces)
+        {
+            if(deadRow==p.currentPos.row&&deadCol==p.currentPos.column)
+            {
+                pieces.remove(p);
+            }
+        }
+    }
+
     public Square[][] placePieces(Square[][] t)
     {
         if(color){
