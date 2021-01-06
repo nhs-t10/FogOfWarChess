@@ -106,7 +106,7 @@ public class RunWindow extends Application {
                                     board.add(new Rectangle(75,75,c),newRow,newCol);
                                 }else
                                 {
-                                    System.out.println("no peice here");
+                                    System.out.println("no piece here");
                                 }
 
                             }catch(Exception ex){

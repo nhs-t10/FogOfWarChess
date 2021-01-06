@@ -2,6 +2,7 @@ import javafx.scene.image.Image;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 abstract class ChessPiece {
@@ -30,7 +31,8 @@ abstract class ChessPiece {
             images=determineImage(representation,color);
         }catch(Exception ex)
         {
-
+			ex.printStackTrace();
+            System.err.println("Can't find image: " + representation);
         }
     }
     Square[][] move(Square[][] t,int newRow, int newCol,ArrayList<int[]>posMoves){
@@ -83,63 +85,31 @@ abstract class ChessPiece {
 
     public Image[] determineImage(String representation, boolean pieceColor) throws IOException
     {
-        FileInputStream[] file=new FileInputStream[4];
-        if(pieceColor)
-        {
-            switch (representation.toLowerCase())
-            {
-                case "pn":
-                     file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badPawnWhite.jpg");
-                    break;
-                case "bs":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badBishopWhite.jpg");
-                    break;
-                case "kt":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badKnightWhite.jpg");
-                    break;
-                case "rk":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badRookWhite.jpg");
-                    break;
-                case "qn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badQueenWhite.jpg");
-                    break;
-                case "kn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badKingWhite.jpg");
-                    break;
-                default:
-                    throw(new IllegalArgumentException("i dont know what image sad face"));
+        String color = (pieceColor) ? "white" : "black";
+        String figureName = figureName(representation);
+        String imageFileName = "images/" + color + "_" + figureName + ".png";
 
-            }
-        }else
-        {
-            switch (representation.toLowerCase())
-            {
-                case "pn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badPawnBlack.jpg");
-                    break;
-                case "bs":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badBishopBlack.jpg");
-                    break;
-                case "kt":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badKnightBlack.jpg");
-                    break;
-                case "rk":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badRookBlack.jpg");
-                    break;
-                case "qn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badQueenBlack.jpg");
-                    break;
-                case "kn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\chessImages\\badKingBlack.jpg");
-                    break;
-                default:
-                    throw(new IllegalArgumentException("i dont know what image sad face"));
-            }
-        }
-        return new Image[]{new Image(file[0])};
+
+        InputStream is = ChessPiece.class.getClassLoader().getResourceAsStream(imageFileName);
+        if (is == null)
+            throw new IOException("Can't find image " + imageFileName);
+
+        return new Image[] {
+            new Image(is, 75, 75, true, true)
+        };
     }
 
-
-
+    private static String figureName(String representation) {
+        switch (representation.toLowerCase()) {
+            case "pn": return "pawn";
+            case "bs": return "bishop";
+            case "kt": return "knight";
+            case "rk": return "rook";
+            case "qn": return "queen";
+            case "kn": return "king";
+            default:
+                throw(new IllegalArgumentException("i dont know what image sad face"));
+        }
+    }
 
 }
