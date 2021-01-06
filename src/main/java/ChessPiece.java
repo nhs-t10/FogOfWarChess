@@ -85,68 +85,10 @@ abstract class ChessPiece {
 
     public Image[] determineImage(String representation, boolean pieceColor) throws IOException
     {
-<<<<<<< Updated upstream
         String color = (pieceColor) ? "white" : "black";
         String figureName = figureName(representation);
         String imageFileName = "images/" + color + "_" + figureName + ".png";
 
-=======
-        FileInputStream[] file=new FileInputStream[4];
-        if(pieceColor)
-        {
-            switch (representation.toLowerCase())
-            {
-                case "pn":
-                     file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badPawnWhite.jpg");
-                    break;
-                case "bs":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badBishopWhite.jpg");
-                    break;
-                case "kt":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badKnightWhite.jpg");
-                    break;
-                case "rk":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badRookWhite.jpg");
-                    break;
-                case "qn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badQueenWhite.jpg");
-                    break;
-                case "kn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badKingWhite.jpg");
-                    break;
-                default:
-                    throw(new IllegalArgumentException("i dont know what image sad face"));
-
-            }
-        }else
-        {
-            switch (representation.toLowerCase())
-            {
-                case "pn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badPawnBlack.jpg");
-                    break;
-                case "bs":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badBishopBlack.jpg");
-                    break;
-                case "kt":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badKnightBlack.jpg");
-                    break;
-                case "rk":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badRookBlack.jpg");
-                    break;
-                case "qn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badQueenBlack.jpg");
-                    break;
-                case "kn":
-                    file[0]=new FileInputStream("C:\\Users\\alex\\Documents\\GitHub\\FogOfWarChess\\src\\main\\resources\\chessImages\\badKingBlack.jpg");
-                    break;
-                default:
-                    throw(new IllegalArgumentException("i dont know what image sad face"));
-            }
-        }
-        return new Image[]{new Image(file[0])};
-    }
->>>>>>> Stashed changes
 
         InputStream is = ChessPiece.class.getClassLoader().getResourceAsStream(imageFileName);
         if (is == null)

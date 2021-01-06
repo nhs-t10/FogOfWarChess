@@ -3,153 +3,26 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fc93036-d326-4d8e-b8a8-ccc3f2694260" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_base_11_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_base_win_11_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_controls_win_11_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_graphics_11_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_graphics_win_11_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/FogOfWarChess_main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/FogOfWarChess_test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Bishop.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/BoardObj.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ChessPiece.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/DrawWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/King.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Knight.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Pawn.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Queen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Rook.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/RunGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/RunWindow$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/RunWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Square.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/WhiteKingOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/WhitePawnOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/WhitePawnOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/WhiteQueenOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badBishopBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badBishopWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badKingBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badKingWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badKnightBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badKnightWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badPawnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badPawnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badQueenBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badQueenWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badRookBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/badRookWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBackground.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBackgroundMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBishopOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBishopOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBishopOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBishopOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBishopOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBishopOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBishopOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackBishopOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackFogBackground.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKingOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKingOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKingOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKingOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKingOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKingOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKingOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKingOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKnightOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKnightOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKnightOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKnightOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKnightOnWhitFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKnightOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKnightOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackKnightOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackPawnOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackPawnOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackPawnOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackPawnOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackPawnOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackPawnOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackPawnOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackPawnOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackQueenOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackQueenOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackQueenOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackQueenOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackQueenOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackQueenOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackQueenOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackQueenOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackRookOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackRookOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackRookOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackRookOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackRookOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackRookOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackRookOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/blackRookOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBackground.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBackgroundMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBishopOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBishopOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBishopOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBishopOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBishopOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBishopOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBishopOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteBishopOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteFogBackground.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKingOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKingOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKingOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKingOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKingOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKingOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKingOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKnightOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKnightOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKnightOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKnightOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKnightOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKnightOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKnightOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteKnightOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whitePawnOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whitePawnOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whitePawnOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whitePawnOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whitePawnOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whitePawnOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteQueenOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteQueenOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteQueenOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteQueenOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteQueenOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteQueenOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteQueenOnWhiteSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteRookOnBlack.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteRookOnBlackFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteRookOnBlackMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteRookOnBlackSelected.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteRookOnWhite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteRookOnWhiteFog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteRookOnWhiteMove.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/chessImages/whiteRookOnWhiteSelected.jpg" beforeDir="false" />
-    </list>
+    <list default="true" id="3fc93036-d326-4d8e-b8a8-ccc3f2694260" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -187,6 +60,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
@@ -215,23 +89,34 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="223" key="GridCell.Tab.0.bottom" timestamp="1609902948314">
+    <state width="1493" height="223" key="GridCell.Tab.0.bottom" timestamp="1609903110221">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1609902948314" />
-    <state width="1493" height="223" key="GridCell.Tab.0.center" timestamp="1609902948314">
+    <state width="1493" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1609903110221" />
+    <state width="1493" height="223" key="GridCell.Tab.0.center" timestamp="1609903110221">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1609902948314" />
-    <state width="1493" height="223" key="GridCell.Tab.0.left" timestamp="1609902948314">
+    <state width="1493" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1609903110221" />
+    <state width="1493" height="223" key="GridCell.Tab.0.left" timestamp="1609903110221">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1609902948314" />
-    <state width="1493" height="223" key="GridCell.Tab.0.right" timestamp="1609902948314">
+    <state width="1493" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1609903110221" />
+    <state width="1493" height="223" key="GridCell.Tab.0.right" timestamp="1609903110221">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1609902948314" />
+    <state width="1493" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1609903110221" />
     <state x="277" y="77" key="SettingsEditor" timestamp="1609902961406">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
