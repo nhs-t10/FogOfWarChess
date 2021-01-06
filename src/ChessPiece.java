@@ -34,12 +34,12 @@ abstract class ChessPiece {
         }
     }
     Square[][] move(Square[][] t,int newRow, int newCol,ArrayList<int[]>posMoves){
-        System.out.println("moving");
+//        System.out.println("moving");
         Square[][] backupT = t;
         try {
             for (int i = 0; i < posMoves.size(); i++) {
                 if (posMoves.get(i)[0] == newRow && posMoves.get(i)[1] == newCol) {
-                    System.out.println("found it");
+//                    System.out.println("found it");
                     if(t[newRow][newCol].hasAPiece())
                     {
                         t[newRow][newCol].pieces[0].destroy(owner);
@@ -52,6 +52,7 @@ abstract class ChessPiece {
         }catch(Exception e)
         {
             //idk lol but i imagine something will eventually go here lmao
+            System.out.println("exception in move");
             return backupT;
         }
         for(ChessPiece p: owner.pieces)

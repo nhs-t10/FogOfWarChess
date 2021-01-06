@@ -25,10 +25,10 @@ public class Pawn extends ChessPiece{
     public ArrayList<int[]> possibleMoves(Square[][] t)
     {
         ArrayList<int[]> posMoves = new ArrayList<>();
-        System.out.println("for posmobes i need current pos, row: "+this.currentPos.row+" , and the col :) : "+this.currentPos.column);
+//        System.out.println("for posmobes i need current pos, row: "+this.currentPos.row+" , and the col :) : "+this.currentPos.column);
         if(!(this.currentPos.row==7)&&!(this.currentPos.row==0))
         {
-            System.out.println("we in the first ");
+//            System.out.println("we in the first ");
             if(!t[this.currentPos.row+direction][this.currentPos.column].hasAPiece()){
                 posMoves.add(new int[]{this.currentPos.row+direction,this.currentPos.column,0});
             }
@@ -62,7 +62,7 @@ public class Pawn extends ChessPiece{
                 posMoves.add(new int[]{this.currentPos.row+direction,this.currentPos.column+1});
             }
         }
-        System.out.println("pos m0ovessize: "+posMoves.size());
+//        System.out.println("pos m0ovessize: "+posMoves.size());
         return posMoves;
     }
 
@@ -73,23 +73,23 @@ public class Pawn extends ChessPiece{
     @Override
     public Square[][] move(Square[][] t, int newRow, int newCol, ArrayList<int[]>posMoves)//may need some way to claim that move is impossible?
     {
-        System.out.println("in pawn move");
+//        System.out.println("in pawn move");
         Square[][] backupT = t;
 
         try{
             if(t[this.currentPos.row][newCol].hasAPiece()&&t[this.currentPos.row][newCol].pieces[0] instanceof Pawn&&((Pawn)t[this.currentPos.row][newCol].pieces[0]).enPassantAble&&!t[newRow][newCol].hasAPiece()&&t[this.currentPos.row][newCol].pieces[0].pieceColor!=this.pieceColor&&(((this.currentPos.row==4&&newRow==5))||(this.currentPos.row==3&&newRow==2))){//just an apology for anyone who has to read this :)
-                System.out.println("first if");
+//                System.out.println("first if");
                 t[this.currentPos.row][newCol].pieces[0].destroy(owner);
                 t[newRow][newCol].pieces[0]=this;
                 t[this.currentPos.row][this.currentPos.column].pieces=new ChessPiece[2];
                 this.currentPos=t[newRow][newCol];
             } else if(((this.currentPos.row==6&&direction==1)||(this.currentPos.row==0&&direction==-1)))
             {
-                System.out.println("second if");
+//                System.out.println("second if");
                 return changePiece(t);
             } else
             {
-                System.out.println("else statement");
+//                System.out.println("else statement");
                 for (int i = 0; i < posMoves.size(); i++) {
                     System.out.println(posMoves.get(i)[0]+", " + posMoves.get(i)[1]);
                     System.out.println(newRow+", "+newCol);
@@ -97,13 +97,13 @@ public class Pawn extends ChessPiece{
                         t[newRow][newCol].pieces[0] = this;
                         t[this.currentPos.row][this.currentPos.column].pieces = new ChessPiece[2];
                         currentPos = t[newRow][newCol];
-                        System.out.println("made the move now >:D");
+//                        System.out.println("made the move now >:D");
                     }
                 }
             }
         }catch(IllegalArgumentException ex)
         {
-            System.out.println("in the catch baby");
+            System.out.println("in the catch of pawn baby");
             enPassantAble=false;
             return backupT;
             //illegal move here????????????????????????
