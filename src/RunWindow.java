@@ -24,8 +24,9 @@ public class RunWindow extends Application {
 
     final int X_DIM = 1500;
     final int Y_DIM = 800; //750 is height of stuff in y :)
-    int selectedRow=-1;
     int selectedCol=-1;
+    int selectedRow=-1;
+    Color c;
     BoardObj chessBoard = new BoardObj(false);
     @Override
     public void start(Stage stage) throws IOException {
@@ -37,7 +38,7 @@ public class RunWindow extends Application {
         {
             for(int j = 0; j < 8; j++)
             {
-                System.out.println(chessBoard.getTiles()[i][j].hasAPiece()+", "+i+", "+j);
+//                System.out.println(chessBoard.getTiles()[i][j].hasAPiece()+", "+i+", "+j);
             }
         }
         int lastRow = 0;
@@ -72,37 +73,100 @@ public class RunWindow extends Application {
             for(int j = 0; j<8; j++)
             {
 
-                Color c=Color.rgb(13, 97, 35);
+                c=Color.rgb(13, 97, 35);
                 if((7*i+j)%2==0)
                     c=Color.rgb(221, 224, 162);
                 if(figureOutWhatPeice(i,j,chessBoard.getTiles())!=null)
                 {
-                    System.out.println("we made it here");
+//                    System.out.println("we made it here");
                     ImageView temp = new ImageView(chessBoard.getTiles()[i][j].pieces[0].images[0]);
                     temp.setOnMouseClicked(e ->{
                         int newRow = (int)((e.getSceneX()-450)/75);
-                        int newCol = (int)(1+(e.getSceneY()-100)/75);
-                        
-
-                        try
+                        int newCol = (int)((e.getSceneY()-100)/75);
+                        if(newRow == selectedRow && newCol==selectedCol)
                         {
-                            chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75),chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
-                            System.out.println("move works?");
-                        }catch(Exception ex){
-                            System.out.println("error found in the lambda for figure out what peice not being null :)");
+                            selectedRow=-1;
+                            selectedCol=-1;
+                            System.out.println("unselected");
+                        } else if(selectedRow!=-1 && selectedCol != -1)
+                        {
+//                            System.out.println("trying to move");
+                            try
+                            {
+                                System.out.println("in the try");
+                                if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
+                                {
+                                    System.out.println("peice exists");
+                                    System.out.println(chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].representation);
+                                    chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75),chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
+                                    System.out.println("move works?");
+                                    board.getChildren().remove(newRow,newCol);
+                                    board.getChildren().remove(temp);
+                                    board.add(temp,newRow,newCol);
+                                    board.add(new Rectangle(75,75,c),newRow,newCol);
+                                }else
+                                {
+                                    System.out.println("no peice here");
+                                }
+
+                            }catch(Exception ex){
+                                ex.printStackTrace();
+                                System.out.println("error found in the image lambda for figure out what peice not being null :)");
+
+                            }
+                        } else
+                        {
+                            selectedRow = newRow; selectedCol = newCol;
+                            System.out.println("selected");
                         }
 
-                        System.out.println("hi 1");
+
+
+//                        System.out.println("hi 1");
                     });
 
                     board.add(temp,j,8-i,1,1);
                 }else
-                {
+                {////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     Rectangle temp = new Rectangle(75,75,c);
                     temp.setOnMouseClicked(e -> {
-                        System.out.println("i also got clicked");
-//                        board.getChildren().remove(temp);
-//                        board.add(new ImageView(tenmo),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75));
+                        int newRow = (int)((e.getSceneX()-450)/75);
+                        int newCol = (int)((e.getSceneY()-100)/75);
+                        if(newRow == selectedRow && newCol==selectedCol)
+                        {
+                            selectedRow=-1;
+                            selectedCol=-1;
+                            System.out.println("unselected");
+                        } else if(selectedRow!=-1 && selectedCol != -1)
+                        {
+                            System.out.println("trying to move");
+                            try
+                            {
+                                System.out.println(selectedRow+"|"+selectedCol);
+                                if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
+                                {
+                                    System.out.println("pre move error");
+                                    chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75),chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
+                                    System.out.println("move works?");
+//                                    board.getChildren().remove(newRow,newCol);
+                                    board.getChildren().remove(temp);
+                                    board.add(temp,newRow,newCol+1);
+//                                    board.add(new Rectangle(75,75,c),newRow,newCol);
+                                }else
+                                {
+                                    System.out.println("no peice here");
+
+                                }
+
+                            }catch(Exception ex){
+                                System.out.println("error found in the rect lambda for figure out what peice not being null :)");
+                                ex.printStackTrace();
+                            }
+                        } else
+                        {
+                            selectedRow = newRow; selectedCol = newCol;
+                            System.out.println("selected");
+                        }
                     });
                     board.add(temp,j,8-i,1,1);
                 }
@@ -123,7 +187,7 @@ public class RunWindow extends Application {
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("mouse click detected! "+event.getSceneX()+"|"+event.getSceneY());
+//                System.out.println("mouse click detected! "+event.getSceneX()+"|"+event.getSceneY());
                 if(event.getSceneX()>=450&&event.getSceneX()<=1050&&event.getSceneY()>=100&&event.getSceneY()<=700)
                 {
                     System.out.println("the cords are: "+(int)(event.getSceneX()-450)/75+","+(int)(event.getSceneY()-100)/75);
@@ -149,10 +213,10 @@ public class RunWindow extends Application {
 
     public static Image figureOutWhatPeice(int i, int j, Square[][] t)
     {
-        System.out.println("i am being useful");
+//        System.out.println("i am being useful");
         if(t[i][j].hasAPiece())
         {
-            System.out.println("image?");
+//            System.out.println("image?");
             return t[i][j].pieces[0].images[0];
         }
         return null;

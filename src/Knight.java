@@ -19,10 +19,10 @@ public class Knight extends ChessPiece{
                 theMoves.add(i);
             }
         }
-        System.out.println("pos moves "+theMoves.size());
+//        System.out.println("pos moves "+theMoves.size());
         for(int[]i:theMoves)
         {
-            System.out.println(i[0]+", "+i[1]);
+//            System.out.println(i[0]+", "+i[1]);
         }
         return theMoves;
 
