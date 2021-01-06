@@ -93,32 +93,47 @@ public class RunWindow extends Application {
                             System.out.println("unselected");
                         } else if(selectedRow!=-1 && selectedCol != -1)
                         {
-//                            System.out.println("trying to move");
+                            System.out.println("trying to move: "+selectedRow+"|"+selectedCol + "to "+ newRow+"|"+newCol);
                             try
                             {
-                                System.out.println("in the try");
+                                System.out.println(selectedRow+"|"+selectedCol);
                                 if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
                                 {
-                                    System.out.println("peice exists");
-                                    System.out.println(chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].representation);
+                                    if(imageSave==null)
+                                    {
+                                        System.out.println("image save is null");
+                                    }
                                     chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75),chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
                                     System.out.println("move works?");
-                                    board.getChildren().remove(newRow,newCol);
-                                    board.getChildren().remove(temp);
-                                    board.add(temp,newRow,newCol);
-                                    board.add(new Rectangle(75,75,c),newRow,newCol);
+
+                                    board.getChildren().remove(imageSave);
+
+
+                                    ObservableList<Node> childrens = board.getChildren();
+
+                                    for(Node node : childrens) {
+                                        if(node instanceof ImageView && board.getRowIndex(node) == newCol-1 && board.getColumnIndex(node) == newRow) {
+
+                                            board.getChildren().remove(node);
+                                            break;
+                                        }
+                                    }
+                                    board.add(new Rectangle(75,75,c),newRow,newCol+1);
+                                    board.add(imageSave,newRow,newCol+1);
+
+
                                 }else
                                 {
-                                    System.out.println("no piece here");
+                                    System.out.println("no peice here");
+
                                 }
-                                selectedRow=-1;
-                                selectedCol=-1;
 
                             }catch(Exception ex){
-                                ex.printStackTrace();
                                 System.out.println("error found in the image lambda for figure out what peice not being null :)");
-
+                                ex.printStackTrace();
                             }
+                            selectedRow=-1;
+                            selectedCol=-1;
                         } else
                         {
                             selectedRow = newRow; selectedCol = newCol;
@@ -145,7 +160,7 @@ public class RunWindow extends Application {
                             System.out.println("unselected");
                         } else if(selectedRow!=-1 && selectedCol != -1)
                         {
-                            System.out.println("trying to move");
+                            System.out.println("trying to move: "+selectedRow+"|"+selectedCol + "to "+ newRow+"|"+newCol);
                             try
                             {
                                 System.out.println(selectedRow+"|"+selectedCol);
@@ -163,14 +178,14 @@ public class RunWindow extends Application {
 
                                     ObservableList<Node> childrens = board.getChildren();
 
-//                                    for(Node node : childrens) {
-//                                        if(node instanceof ImageView && board.getRowIndex(node) == newRow && board.getColumnIndex(node) == newCol) {
-//
-//                                            board.getChildren().remove(node);
-//                                            break;
-//                                        }
-//                                    }
-//                                    board.add(new Rectangle(75,75,c),newRow,newCol+1);
+                                    for(Node node : childrens) {
+                                        if(node instanceof ImageView && board.getRowIndex(node) == newCol-1 && board.getColumnIndex(node) == newRow) {
+
+                                            board.getChildren().remove(node);
+                                            break;
+                                        }
+                                    }
+                                    board.add(new Rectangle(75,75,c),newRow,newCol+1);
                                     board.add(imageSave,newRow,newCol+1);
 
 
