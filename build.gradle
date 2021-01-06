@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+sourceCompatibility = 11
+
+group = 'fog-of-war-chess'
+version = '0.0.1-SNAPSHOT'
+//systemProp.file.encoding='utf-8'
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.graphics']
+}
+
+repositories {
+    mavenCentral()
+}
+
