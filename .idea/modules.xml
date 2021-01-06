@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FogOfWarChess.iml" filepath="$PROJECT_DIR$/FogOfWarChess.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FogOfWarChess_main.iml" filepath="$PROJECT_DIR$/.idea/modules/FogOfWarChess_main.iml" group="FogOfWarChess" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FogOfWarChess_test.iml" filepath="$PROJECT_DIR$/.idea/modules/FogOfWarChess_test.iml" group="FogOfWarChess" />
+    </modules>
+  </component>
+</project>
