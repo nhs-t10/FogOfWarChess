@@ -1,7 +1,9 @@
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +28,7 @@ public class RunWindow extends Application {
     final int Y_DIM = 800; //750 is height of stuff in y :)
     int selectedCol=-1;
     int selectedRow=-1;
+    ImageView imageSave;
     Color c;
     BoardObj chessBoard = new BoardObj(false);
     @Override
@@ -108,6 +111,8 @@ public class RunWindow extends Application {
                                 {
                                     System.out.println("no piece here");
                                 }
+                                selectedRow=-1;
+                                selectedCol=-1;
 
                             }catch(Exception ex){
                                 ex.printStackTrace();
@@ -117,6 +122,7 @@ public class RunWindow extends Application {
                         } else
                         {
                             selectedRow = newRow; selectedCol = newCol;
+                            imageSave=temp;
                             System.out.println("selected");
                         }
 
@@ -145,13 +151,29 @@ public class RunWindow extends Application {
                                 System.out.println(selectedRow+"|"+selectedCol);
                                 if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
                                 {
-                                    System.out.println("pre move error");
+                                    if(imageSave==null)
+                                    {
+                                        System.out.println("image save is null");
+                                    }
                                     chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75),chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
                                     System.out.println("move works?");
-//                                    board.getChildren().remove(newRow,newCol);
-                                    board.getChildren().remove(temp);
-                                    board.add(temp,newRow,newCol+1);
-//                                    board.add(new Rectangle(75,75,c),newRow,newCol);
+
+                                    board.getChildren().remove(imageSave);
+
+
+                                    ObservableList<Node> childrens = board.getChildren();
+
+//                                    for(Node node : childrens) {
+//                                        if(node instanceof ImageView && board.getRowIndex(node) == newRow && board.getColumnIndex(node) == newCol) {
+//
+//                                            board.getChildren().remove(node);
+//                                            break;
+//                                        }
+//                                    }
+//                                    board.add(new Rectangle(75,75,c),newRow,newCol+1);
+                                    board.add(imageSave,newRow,newCol+1);
+
+
                                 }else
                                 {
                                     System.out.println("no peice here");
@@ -162,6 +184,8 @@ public class RunWindow extends Application {
                                 System.out.println("error found in the rect lambda for figure out what peice not being null :)");
                                 ex.printStackTrace();
                             }
+                            selectedRow=-1;
+                            selectedCol=-1;
                         } else
                         {
                             selectedRow = newRow; selectedCol = newCol;
@@ -221,6 +245,8 @@ public class RunWindow extends Application {
         }
         return null;
     }
+
+
 
 
 }
