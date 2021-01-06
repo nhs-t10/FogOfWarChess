@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.image.Image;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -23,10 +24,12 @@ public class RunWindow extends Application {
 
     final int X_DIM = 1500;
     final int Y_DIM = 800; //750 is height of stuff in y :)
+    int selectedRow=-1;
+    int selectedCol=-1;
+    BoardObj chessBoard = new BoardObj(false);
     @Override
     public void start(Stage stage) throws IOException {
         //Creating a Path
-        BoardObj chessBoard = new BoardObj(false);
         Player me = new Player(true,chessBoard);
         Player notMe = new Player(false,chessBoard);
         chessBoard.setBoard();
@@ -37,6 +40,8 @@ public class RunWindow extends Application {
                 System.out.println(chessBoard.getTiles()[i][j].hasAPiece()+", "+i+", "+j);
             }
         }
+        int lastRow = 0;
+        int lastCol = 0;
         chessBoard.setPlayers(me,notMe);
         chessBoard.changeTiles(me.placePieces(chessBoard.getTiles()));
         chessBoard.changeTiles(notMe.placePieces(chessBoard.getTiles()));
@@ -53,8 +58,6 @@ public class RunWindow extends Application {
         layout.setMargin(additionalInfoGrid,new Insets(25,25,25,25));
 
 
-
-
         boardAreaGrid.add(whitePieces,0,0,1,1);
         boardAreaGrid.add(board,0,1,1,1);
         boardAreaGrid.add(blackPieces,0,2,1,1);
@@ -63,7 +66,50 @@ public class RunWindow extends Application {
         boardAreaGrid.setHgap(40);
         chatGrid.add(new Rectangle(300,750),0,0,1,1);
         additionalInfoGrid.add(new Rectangle(300,750),0,0);
-        board = updateBoard(chessBoard);
+
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j<8; j++)
+            {
+
+                Color c=Color.rgb(13, 97, 35);
+                if((7*i+j)%2==0)
+                    c=Color.rgb(221, 224, 162);
+                if(figureOutWhatPeice(i,j,chessBoard.getTiles())!=null)
+                {
+                    System.out.println("we made it here");
+                    ImageView temp = new ImageView(chessBoard.getTiles()[i][j].pieces[0].images[0]);
+                    temp.setOnMouseClicked(e ->{
+                        int newRow = (int)((e.getSceneX()-450)/75);
+                        int newCol = (int)(1+(e.getSceneY()-100)/75);
+                        
+
+                        try
+                        {
+                            chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75),chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
+                            System.out.println("move works?");
+                        }catch(Exception ex){
+                            System.out.println("error found in the lambda for figure out what peice not being null :)");
+                        }
+
+                        System.out.println("hi 1");
+                    });
+
+                    board.add(temp,j,8-i,1,1);
+                }else
+                {
+                    Rectangle temp = new Rectangle(75,75,c);
+                    temp.setOnMouseClicked(e -> {
+                        System.out.println("i also got clicked");
+//                        board.getChildren().remove(temp);
+//                        board.add(new ImageView(tenmo),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75));
+                    });
+                    board.add(temp,j,8-i,1,1);
+                }
+
+
+            }
+        }
 
         //Creating a Group object
         Group root = new Group();
@@ -81,10 +127,12 @@ public class RunWindow extends Application {
                 if(event.getSceneX()>=450&&event.getSceneX()<=1050&&event.getSceneY()>=100&&event.getSceneY()<=700)
                 {
                     System.out.println("the cords are: "+(int)(event.getSceneX()-450)/75+","+(int)(event.getSceneY()-100)/75);
-                }
 
+                }
             }
         });
+
+
 
         //Adding scene to the stage
         stage.setScene(scene);
@@ -109,30 +157,6 @@ public class RunWindow extends Application {
         }
         return null;
     }
-    public static GridPane updateBoard(BoardObj chessBoard)
-    {
-        GridPane board = new GridPane();
-        for(int i = 0; i < 8; i++)
-        {
-            for(int j = 0; j<8; j++)
-            {
-                Color c=Color.rgb(13, 97, 35);
-                if((7*i+j)%2==0)
-                    c=Color.rgb(221, 224, 162);
-                if(figureOutWhatPeice(i,j,chessBoard.getTiles())!=null)
-                {
-                    System.out.println("we made it here");
-                    board.add(new ImageView(chessBoard.getTiles()[i][j].pieces[0].images[0]),j,8-i,1,1);
-                }else
-                {
-                    board.add(new Rectangle(75,75,c),j,8-i,1,1);
-                }
 
-
-            }
-        }
-        return board;
-
-    }
 
 }
