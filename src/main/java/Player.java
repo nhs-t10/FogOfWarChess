@@ -63,19 +63,36 @@ public class Player {
         return t;
     }
 
-    public void calculateVisibleSquares()
+    public boolean[][] calculateVisibleSquares()
     {
-        Boolean[][] canSeeSquare = new Boolean[8][8];
+        boolean[][] canSeeSquare = new boolean[8][8];
         for(ChessPiece p:pieces)
         {
+//            System.out.println(p.representation);
             for(int[] moves: p.possibleMoves(board.getTiles()))
             {
+//                System.out.println("moves of o "+moves[0]+"  |  moves of 1 "+ moves[1]);
                 if(!canSeeSquare[moves[0]][moves[1]])
                 {
                     canSeeSquare[moves[0]][moves[1]]=true;
                 }
             }
+            if(!canSeeSquare[p.currentPos.row][p.currentPos.column])
+            {
+                canSeeSquare[p.currentPos.row][p.currentPos.column]=true;
+            }
         }
+        System.out.println("fog array---------------");
+        for(int i = 0;i<8;i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                System.out.print(((canSeeSquare[i][j])? "T":"F")+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("------------------------");
+        return canSeeSquare;
         //well we calculated it but not sure what to do with it now that we calculated it
     }
 

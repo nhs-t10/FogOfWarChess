@@ -11,93 +11,15 @@ public class King extends ChessPiece {
         ArrayList<int[]> posMoves = new ArrayList<>();
         int row = this.currentPos.row;
         int col = this.currentPos.column;
-
-        if(row+1<8&&t[row+1][col].hasAPiece())
-        {
-            if(t[row+1][col].pieces[0].pieceColor!=this.pieceColor)
-            {
-                posMoves.add(new int[]{row+1,col});
-            }
-        }else{
-            posMoves.add(new int[]{row+1,col});
-        }
-
-        if(row+1<8&&col+1<8&&t[row+1][col+1].hasAPiece())
-        {
-            if(t[row+1][col+1].pieces[0].pieceColor!=this.pieceColor)
-            {
-                posMoves.add(new int[]{row+1,col+1});
-            }
-        }else{
-            posMoves.add(new int[]{row+1,col+1});
-        }
-
-        if(col+1<8&&t[row][col+1].hasAPiece())
-        {
-            if(t[row][col+1].pieces[0].pieceColor!=this.pieceColor)
-            {
-                posMoves.add(new int[]{row,col+1});
-            }
-        }else{
-            posMoves.add(new int[]{row,col+1});
-        }
-
-        if(row!=0&&col+1<8&&t[row-1][col+1].hasAPiece())
-        {
-            if(t[row-1][col+1].pieces[0].pieceColor!=this.pieceColor)
-            {
-                posMoves.add(new int[]{row-1,col+1});
-            }
-        }else{
-            posMoves.add(new int[]{row-1,col+1});
-        }
-
-        if(row!=0&&t[row-1][col].hasAPiece())
-        {
-            if(t[row-1][col].pieces[0].pieceColor!=this.pieceColor)
-            {
-                posMoves.add(new int[]{row-1,col});
-            }
-        }else{
-            posMoves.add(new int[]{row-1,col});
-        }
-
-        if(row!=0&&col!=0&&t[row-1][col-1].hasAPiece())
-        {
-            if(t[row-1][col-1].pieces[0].pieceColor!=this.pieceColor)
-            {
-                posMoves.add(new int[]{row-1,col-1});
-            }
-        }else{
-            posMoves.add(new int[]{row-1,col-1});
-        }
-
-        if(col!=0&&t[row][col-1].hasAPiece())
-        {
-            if(t[row][col-1].pieces[0].pieceColor!=this.pieceColor)
-            {
-                posMoves.add(new int[]{row,col-1});
-            }
-        }else{
-            posMoves.add(new int[]{row,col-1});
-        }
-
-        if(col!=0&&row+1<8&&t[row+1][col-1].hasAPiece())
-        {
-            if(t[row+1][col-1].pieces[0].pieceColor!=this.pieceColor)
-            {
-                posMoves.add(new int[]{row+1,col-1});
-            }
-        }else{
-            posMoves.add(new int[]{row+1,col-1});
-        }
-        for(ChessPiece p: owner.pieces)
-        {
-            if(p instanceof Rook && ((Rook) p).canCastle&&this.canCastle)
-            {
-                posMoves.add(new int[]{p.currentPos.row,p.currentPos.column});
-            }
-        }
+        posMoves.add(new int[]{row+1,col});
+        posMoves.add(new int[]{row+1,col+1});
+        posMoves.add(new int[]{row,col+1});
+        posMoves.add(new int[]{row-1,col+1});
+        posMoves.add(new int[]{row-1,col});
+        posMoves.add(new int[]{row-1,col-1});
+        posMoves.add(new int[]{row,col-1});
+        posMoves.add(new int[]{row+1,col-1});
+        posMoves.removeIf(i -> i[0] < 0 || i[0] > 7 || i[1] < 0 || i[1] > 7);
         return posMoves;
     }
 

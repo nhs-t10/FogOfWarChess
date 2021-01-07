@@ -18,6 +18,8 @@ public class DrawWindow extends JPanel
     private final int INITIAL_Y = -40;
     private final int DELAY = 25;
 
+
+
     private Image star;
     private Timer timer;
     private int x, y;

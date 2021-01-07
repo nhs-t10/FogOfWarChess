@@ -20,6 +20,7 @@ public class RunWindow extends Application {
     int selectedRow=-1;
     ImageView movingPieceImage;
 
+    boolean turn = true;
 
     private final BoardObj chessBoard = new BoardObj(false);
     private final GridPane board = new GridPane();
@@ -100,18 +101,16 @@ public class RunWindow extends Application {
         {
             selectedRow=-1;
             selectedCol=-1;
+            movingPieceImage=null;
             System.out.println("unselected");
         } else if(selectedRow!=-1 && selectedCol != -1)
         {
             System.out.println("Trying to move: {"+selectedRow+","+selectedCol+"} to {" + newRow+","+newCol +'}');
             try
             {
-                if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
+                if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece()&&chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].pieceColor==turn&&movingPieceImage!=null)
                 {
-                    if(movingPieceImage == null)
-                    {
-                        System.err.println("We don't have a piece to move ???");
-                    }
+
 
                     // modifying the model
                     chessBoard.dump();
@@ -129,6 +128,8 @@ public class RunWindow extends Application {
                     }
                     board.add(new Rectangle(75,75, getColor(newCol, newRow)),newCol,newRow);
                     board.add(movingPieceImage,newCol,newRow);
+
+                    turn = !turn;
                 }else
                 {
                     System.out.println("Square has no piece - nothing to do.");
@@ -140,6 +141,7 @@ public class RunWindow extends Application {
             }
             selectedRow=-1;
             selectedCol=-1;
+            movingPieceImage=null;
         } else
         {
             selectedRow = newRow; selectedCol = newCol;
@@ -181,18 +183,16 @@ public class RunWindow extends Application {
             {
                 selectedRow=-1;
                 selectedCol=-1;
+                movingPieceImage=null;
             } else if(selectedRow!=-1 && selectedCol != -1)
             {
                 System.out.println("Trying to move: {"+selectedRow+","+selectedCol+"} to {" + newRow+","+newCol +'}');
                 try
                 {
                     System.out.println(selectedRow+"|"+selectedCol);
-                    if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
+                    if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece()&&chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].pieceColor==turn&&movingPieceImage!=null)
                     {
-                        if(movingPieceImage ==null)
-                        {
-                            System.out.println("image save is null");
-                        }
+
                         chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(
                                 chessBoard.getTiles(),newRow,newCol,chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()) //TODO: refactor
                         );
@@ -210,6 +210,8 @@ public class RunWindow extends Application {
                         }
                         board.add(new Rectangle(75,75, getColor(newCol, newRow)),newCol,newRow);
                         board.add(movingPieceImage,newCol,newRow);
+
+                        turn = !turn;
                     }else
                     {
                         System.out.println("no peice here");
@@ -222,6 +224,7 @@ public class RunWindow extends Application {
                 }
                 selectedRow=-1;
                 selectedCol=-1;
+                movingPieceImage=null;
             } else
             {
                 System.out.println("Preparing to move a piece " + this);

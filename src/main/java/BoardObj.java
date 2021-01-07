@@ -73,6 +73,10 @@ public class BoardObj {
 
     void dump() {
         System.out.println(sendBoardConsole());
+        System.out.println("p1:");
+        p1.calculateVisibleSquares();
+        System.out.println("p2:");
+        p2.calculateVisibleSquares();
     }
 
     public String sendBoardConsole()
