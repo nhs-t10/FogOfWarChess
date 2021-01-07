@@ -21,6 +21,7 @@ public class RunWindow extends Application {
     public static final int CELL_SIZE = 75;
     public static final int LABEL_SIZE = 20;
     public static final int BOARD_SIZE = 8*CELL_SIZE + 2*LABEL_SIZE;
+    private static final DropShadow DS = new DropShadow( 20, Color.YELLOW );
     final int X_DIM = 1500;
     final int Y_DIM = 800; //750 is height of stuff in y :)
     int selectedCol=-1;
@@ -345,8 +346,7 @@ public class RunWindow extends Application {
     private static Color getFogColor(int row, int col)
     {
         if((7* row + col)%2==0)
-            return Color.rgb(
-                    125, 125, 121); // white
+            return Color.rgb(125, 125, 121); // white
         else
             return Color.rgb(63, 69, 65); // black
     }
