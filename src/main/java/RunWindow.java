@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-
+//IMPORTANT: COL THEN ROW FOR GUI STUFF, ROW THEN COL FOR NON GUI STUFF
 public class RunWindow extends Application {
 
     public static final int CELL_SIZE = 75;
@@ -27,6 +27,7 @@ public class RunWindow extends Application {
     ImageView movingPieceImage;
 
     boolean turn = true;
+    static boolean applyFog = true;
 
     private final BoardObj chessBoard = new BoardObj(false);
     private final GridPane board = new GridPane();
@@ -90,6 +91,20 @@ public class RunWindow extends Application {
                 }
             }
         }
+        if(applyFog)
+        {
+            boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
+            for(int row = 0; row < 8; row++)
+            {
+                for(int col = 0; col<8;col++)
+                {
+                    if(!fogSquares[row][col])
+                    {
+                        board.add(new FogRect(col,row),col,row);
+                    }
+                }
+            }
+        }
 
         //Creating a scene object
         Scene scene = new Scene(layout, X_DIM , Y_DIM/*, Color.rgb(215, 245, 198)*/);
@@ -141,6 +156,28 @@ public class RunWindow extends Application {
                     board.add(movingPieceImage,newCol,newRow);
 
                     turn = !turn;
+
+
+
+                    if(applyFog)
+                    {
+                        System.err.println("WE REMOVIN");
+                        board.getChildren().removeIf(node -> node instanceof FogRect && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol);
+
+
+
+//                        boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
+//                        for(int row = 0; row < 8; row++)
+//                        {
+//                            for(int col = 0; col<8;col++)
+//                            {
+//                                if(!fogSquares[row][col])
+//                                {
+//                                    board.add(new FogRect(row,col),col,row);
+//                                }
+//                            }
+//                        }
+                    }
                 }else
                 {
                     System.out.println("Square has no piece - nothing to do.");
@@ -173,7 +210,17 @@ public class RunWindow extends Application {
         }
         return null;
     }
+    class FogRect extends Rectangle {
 
+        FogRect(int row, int col)
+        {
+            super(CELL_SIZE,CELL_SIZE,getFogColor(col,row));
+        }
+        FogRect()
+        {
+            super();
+        }
+    }
 
     class ChessFigure extends ImageView {
         final ChessPiece chessPiece;
@@ -223,6 +270,25 @@ public class RunWindow extends Application {
                         board.add(movingPieceImage,newCol,newRow);
 
                         turn = !turn;
+                        if(applyFog)
+                        {
+                            System.err.println("WE REMOVIN");
+                            board.getChildren().removeIf(node -> node instanceof FogRect && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol);
+
+
+//                            boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
+//                            for(int row = 0; row < 8; row++)
+//                            {
+//                                for(int col = 0; col<8;col++)
+//                                {
+//                                    if(!fogSquares[row][col])
+//                                    {
+//                                        board.add(new FogRect(col,row),col,row);
+//                                    }
+//                                }
+//                            }
+                        }
+
                     }else
                     {
                         System.out.println("no peice here");
@@ -265,9 +331,20 @@ public class RunWindow extends Application {
     }
 
     private static Color getColor (int row, int col) {
+
+
         if((7* row + col)%2==0)
             return Color.rgb(221, 224, 162); // white
         else
             return Color.rgb(13, 97, 35); // black
+    }
+
+    private static Color getFogColor(int row, int col)
+    {
+        if((7* row + col)%2==0)
+            return Color.rgb(
+                    125, 125, 121); // white
+        else
+            return Color.rgb(63, 69, 65); // black
     }
 }

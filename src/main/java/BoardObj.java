@@ -21,6 +21,12 @@ public class BoardObj {
         }
         this.tiles = tiles;
     }
+    public Player getPlayer(boolean whichOne)
+    {
+        if(whichOne)
+            return p1;
+        return p2;
+    }
     public void changeTiles(Square[][]t)
     {
         tiles=t;
