@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 //IMPORTANT: COL THEN ROW FOR GUI STUFF, ROW THEN COL FOR NON GUI STUFF
 public class RunWindow extends Application {
 
-    Color TEMP_COLOR = Color.rgb(255,255,255);
+    public static final Color TEMP_COLOR = Color.rgb(244,244,244);
     public static final int CELL_SIZE = 75;
     public static final int LABEL_SIZE = 20;
     public static final int BOARD_SIZE = 8*CELL_SIZE + 2*LABEL_SIZE;
@@ -110,7 +110,7 @@ public class RunWindow extends Application {
         }
 
         //Creating a scene object
-        Scene scene = new Scene(layout, X_DIM , Y_DIM/*, Color.rgb(215, 245, 198)*/);
+        Scene scene = new Scene(layout, X_DIM , Y_DIM, TEMP_COLOR);
 
         //Setting title to the Stage7
         stage.setTitle("chessboard coming soon");
