@@ -165,21 +165,21 @@ public class RunWindow extends Application {
                     if(applyFog)
                     {
                         System.err.println("WE REMOVIN");
-                        board.getChildren().removeIf(node -> node instanceof FogRect && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol);
+                        board.getChildren().removeIf(node -> node instanceof FogRect);
 
 
 
-//                        boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
-//                        for(int row = 0; row < 8; row++)
-//                        {
-//                            for(int col = 0; col<8;col++)
-//                            {
-//                                if(!fogSquares[row][col])
-//                                {
-//                                    board.add(new FogRect(row,col),col,row);
-//                                }
-//                            }
-//                        }
+                        boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
+                        for(int row = 0; row < 8; row++)
+                        {
+                            for(int col = 0; col<8;col++)
+                            {
+                                if(!fogSquares[row][col])
+                                {
+                                    board.add(new FogRect(row,col),col,row);
+                                }
+                            }
+                        }
                     }
                 }else
                 {
@@ -277,20 +277,20 @@ public class RunWindow extends Application {
                         if(applyFog)
                         {
                             System.err.println("WE REMOVIN");
-                            board.getChildren().removeIf(node -> node instanceof FogRect && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol);
+                            board.getChildren().removeIf(node -> node instanceof FogRect);
 
 
-//                            boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
-//                            for(int row = 0; row < 8; row++)
-//                            {
-//                                for(int col = 0; col<8;col++)
-//                                {
-//                                    if(!fogSquares[row][col])
-//                                    {
-//                                        board.add(new FogRect(col,row),col,row);
-//                                    }
-//                                }
-//                            }
+                            boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
+                            for(int row = 0; row < 8; row++)
+                            {
+                                for(int col = 0; col<8;col++)
+                                {
+                                    if(!fogSquares[row][col])
+                                    {
+                                        board.add(new FogRect(col,row),col,row);
+                                    }
+                                }
+                            }
                         }
 
                     }else
