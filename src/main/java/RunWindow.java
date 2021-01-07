@@ -1,10 +1,13 @@
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -14,6 +17,9 @@ import javafx.stage.Stage;
 
 public class RunWindow extends Application {
 
+    public static final int CELL_SIZE = 75;
+    public static final int LABEL_SIZE = 20;
+    public static final int BOARD_SIZE = 8*CELL_SIZE + 2*LABEL_SIZE;
     final int X_DIM = 1500;
     final int Y_DIM = 800; //750 is height of stuff in y :)
     int selectedCol=-1;
@@ -40,20 +46,32 @@ public class RunWindow extends Application {
         GridPane additionalInfoGrid = new GridPane();
         GridPane whitePieces = new GridPane();
         GridPane blackPieces = new GridPane();
-        HBox layout = new HBox(75,chatGrid,boardAreaGrid,additionalInfoGrid);
+        HBox layout = new HBox(CELL_SIZE,chatGrid,boardAreaGrid,additionalInfoGrid);
         HBox.setMargin(chatGrid,new Insets(25,25,25,25));
         HBox.setMargin(boardAreaGrid,new Insets(25,25,25,25));
         HBox.setMargin(additionalInfoGrid,new Insets(25,25,25,25));
 
+        BorderPane pane = new BorderPane();
+        GridPane boardWithLabels = new GridPane();
+        for (int i = 0; i < 8; i++) {
+            boardWithLabels.add(newRowLabel(i), 0, i + 1, 1, 1);
+            boardWithLabels.add(newRowLabel(i), 9, i + 1, 1, 1);
+            boardWithLabels.add(newColLabel(i), i + 1, 0, 1, 1);
+            boardWithLabels.add(newColLabel(i), i + 1, 9, 1, 1);
+        }
+        boardWithLabels.add(board, 1, 1, 8, 8);
+        boardWithLabels.setAlignment(Pos.CENTER);
+        pane.setCenter(boardWithLabels);
+
 
         boardAreaGrid.add(whitePieces,0,0,1,1);
-        boardAreaGrid.add(board,0,1,1,1);
+        boardAreaGrid.add(pane,0,1,1,1);
         boardAreaGrid.add(blackPieces,0,2,1,1);
-        whitePieces.add(new Rectangle(600,75),0,0,1,1);
-        blackPieces.add(new Rectangle(600,75),0,0,1,1);
+        whitePieces.add(new Rectangle(BOARD_SIZE,CELL_SIZE),0,0,1,1);
+        blackPieces.add(new Rectangle(BOARD_SIZE,CELL_SIZE),0,0,1,1);
         boardAreaGrid.setHgap(40);
-        chatGrid.add(new Rectangle(300,750),0,0,1,1);
-        additionalInfoGrid.add(new Rectangle(300,750),0,0);
+        chatGrid.add(new Rectangle(300,10*CELL_SIZE),0,0,1,1);
+        additionalInfoGrid.add(new Rectangle(300,10*CELL_SIZE),0,0);
 
         for(int row = 0; row < 8; row++)
         {
@@ -61,7 +79,7 @@ public class RunWindow extends Application {
             {
                 Color c = getColor(row, col);
 
-                Rectangle temp = new Rectangle(75,75, c);
+                Rectangle temp = new Rectangle(CELL_SIZE,CELL_SIZE, c);
                 temp.setOnMouseClicked(this::onMouseClickOnSquare);
                 board.add(temp,col,row,1,1);
 
@@ -87,16 +105,9 @@ public class RunWindow extends Application {
 
     }
 
-    private static Color getColor (int row, int col) {
-        if((7* row + col)%2==0)
-            return Color.rgb(221, 224, 162); // white
-        else
-            return Color.rgb(13, 97, 35); // black
-    }
-
     private void onMouseClickOnSquare(MouseEvent e) {
-        int newCol = (int)((e.getSceneX()-450)/75);
-        int newRow = (int)((e.getSceneY()-100)/75);
+        int newCol = (int)((e.getSceneX()-450-LABEL_SIZE)/CELL_SIZE);
+        int newRow = (int)((e.getSceneY()-100-LABEL_SIZE)/CELL_SIZE);
         if(newRow == selectedRow && newCol==selectedCol)
         {
             selectedRow=-1;
@@ -126,7 +137,7 @@ public class RunWindow extends Application {
                             break;
                         }
                     }
-                    board.add(new Rectangle(75,75, getColor(newCol, newRow)),newCol,newRow);
+                    board.add(new Rectangle(CELL_SIZE,CELL_SIZE, getColor(newCol, newRow)),newCol,newRow);
                     board.add(movingPieceImage,newCol,newRow);
 
                     turn = !turn;
@@ -175,8 +186,8 @@ public class RunWindow extends Application {
         }
 
         private void onMouseClickOnPiece(MouseEvent e) {
-            int newCol = (int)((e.getSceneX()-450)/75);
-            int newRow = (int)((e.getSceneY()-100)/75);
+            int newCol = (int)((e.getSceneX()-450-LABEL_SIZE)/CELL_SIZE);
+            int newRow = (int)((e.getSceneY()-100-LABEL_SIZE)/CELL_SIZE);
             System.out.println("Clicked on row=" + newRow + ", col=" + newCol);
 
             if(newRow == selectedRow && newCol==selectedCol)
@@ -208,7 +219,7 @@ public class RunWindow extends Application {
                                 break;
                             }
                         }
-                        board.add(new Rectangle(75,75, getColor(newCol, newRow)),newCol,newRow);
+                        board.add(new Rectangle(CELL_SIZE,CELL_SIZE, getColor(newCol, newRow)),newCol,newRow);
                         board.add(movingPieceImage,newCol,newRow);
 
                         turn = !turn;
@@ -239,5 +250,24 @@ public class RunWindow extends Application {
         }
     }
 
+    private static Label newRowLabel(int i) {
+        Label l = new Label(Integer.toString(8 - i));
+        l.setMinSize(LABEL_SIZE, CELL_SIZE);
+        l.setAlignment(Pos.CENTER);
+        return l;
+    }
 
+    private static Label newColLabel(int i) {
+        Label l = new Label(Character.toString('A' + i));
+        l.setMinSize(CELL_SIZE, LABEL_SIZE);
+        l.setAlignment(Pos.CENTER);
+        return l;
+    }
+
+    private static Color getColor (int row, int col) {
+        if((7* row + col)%2==0)
+            return Color.rgb(221, 224, 162); // white
+        else
+            return Color.rgb(13, 97, 35); // black
+    }
 }
