@@ -1,19 +1,15 @@
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.image.Image;
-
-import java.io.IOException;
+import javafx.stage.Stage;
 
 
 public class RunWindow extends Application {
@@ -29,7 +25,7 @@ public class RunWindow extends Application {
     private final GridPane board = new GridPane();
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         //Creating a Path
         Player me = new Player(true,chessBoard);
         Player notMe = new Player(false,chessBoard);
@@ -44,9 +40,9 @@ public class RunWindow extends Application {
         GridPane whitePieces = new GridPane();
         GridPane blackPieces = new GridPane();
         HBox layout = new HBox(75,chatGrid,boardAreaGrid,additionalInfoGrid);
-        layout.setMargin(chatGrid,new Insets(25,25,25,25));
-        layout.setMargin(boardAreaGrid,new Insets(25,25,25,25));
-        layout.setMargin(additionalInfoGrid,new Insets(25,25,25,25));
+        HBox.setMargin(chatGrid,new Insets(25,25,25,25));
+        HBox.setMargin(boardAreaGrid,new Insets(25,25,25,25));
+        HBox.setMargin(additionalInfoGrid,new Insets(25,25,25,25));
 
 
         boardAreaGrid.add(whitePieces,0,0,1,1);
@@ -75,9 +71,6 @@ public class RunWindow extends Application {
                 }
             }
         }
-
-        //Creating a Group object
-        Group root = new Group();
 
         //Creating a scene object
         Scene scene = new Scene(layout, X_DIM , Y_DIM/*, Color.rgb(215, 245, 198)*/);
@@ -155,7 +148,7 @@ public class RunWindow extends Application {
     }
 
 
-    public static void main(String args[]){
+    public static void main(String [] args){
         launch(args);
     }
 
