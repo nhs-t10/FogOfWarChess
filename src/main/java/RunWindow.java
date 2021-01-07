@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -154,6 +155,7 @@ public class RunWindow extends Application {
                     }
                     board.add(new Rectangle(CELL_SIZE,CELL_SIZE, getColor(newCol, newRow)),newCol,newRow);
                     board.add(movingPieceImage,newCol,newRow);
+                    movingPieceImage.setEffect(null);
 
                     turn = !turn;
 
@@ -268,6 +270,7 @@ public class RunWindow extends Application {
                         }
                         board.add(new Rectangle(CELL_SIZE,CELL_SIZE, getColor(newCol, newRow)),newCol,newRow);
                         board.add(movingPieceImage,newCol,newRow);
+                        movingPieceImage.setEffect(null);
 
                         turn = !turn;
                         if(applyFog)
@@ -308,6 +311,8 @@ public class RunWindow extends Application {
                 selectedRow = newRow; selectedCol = newCol;
                 movingPieceImage = this;
             }
+
+            this.setEffect( DS );
         }
 
         @Override
@@ -331,8 +336,6 @@ public class RunWindow extends Application {
     }
 
     private static Color getColor (int row, int col) {
-
-
         if((7* row + col)%2==0)
             return Color.rgb(221, 224, 162); // white
         else
