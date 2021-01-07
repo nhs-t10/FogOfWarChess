@@ -85,18 +85,6 @@ public class RunWindow extends Application {
         //Setting title to the Stage7
         stage.setTitle("chessboard coming soon");
 
-//        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                if(event.getSceneX()>=450&&event.getSceneX()<=1050&&event.getSceneY()>=100&&event.getSceneY()<=700)
-//                {
-//                    System.out.println("the cords are: "+(int)(event.getSceneX()-450)/75+","+(int)(event.getSceneY()-100)/75);
-//                }
-//            }
-//        });
-
-
-
         //Adding scene to the stage
         stage.setScene(scene);
 
