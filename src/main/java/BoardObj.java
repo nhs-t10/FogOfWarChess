@@ -70,6 +70,11 @@ public class BoardObj {
     {
         return tiles;
     }
+
+    void dump() {
+        System.out.println(sendBoardConsole());
+    }
+
     public String sendBoardConsole()
     {
 

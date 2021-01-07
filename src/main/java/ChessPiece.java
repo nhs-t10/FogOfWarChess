@@ -112,4 +112,12 @@ abstract class ChessPiece {
         }
     }
 
+    public String getColor() {
+        return (pieceColor) ? "WHITE" : "BLACK";
+    }
+
+    public String toString() {
+        return getColor() + " " + representation.toUpperCase();
+    }
+
 }

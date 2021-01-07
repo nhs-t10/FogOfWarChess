@@ -1,26 +1,20 @@
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.image.Image;
 
-import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+
 
 public class RunWindow extends Application {
 
@@ -28,24 +22,18 @@ public class RunWindow extends Application {
     final int Y_DIM = 800; //750 is height of stuff in y :)
     int selectedCol=-1;
     int selectedRow=-1;
-    ImageView imageSave;
+    ImageView movingPieceImage;
     Color c;
-    BoardObj chessBoard = new BoardObj(false);
+
+    private final BoardObj chessBoard = new BoardObj(false);
+    private final GridPane board = new GridPane();
+
     @Override
     public void start(Stage stage) throws IOException {
         //Creating a Path
         Player me = new Player(true,chessBoard);
         Player notMe = new Player(false,chessBoard);
         chessBoard.setBoard();
-        for(int i = 0; i < 8; i++)
-        {
-            for(int j = 0; j < 8; j++)
-            {
-//                System.out.println(chessBoard.getTiles()[i][j].hasAPiece()+", "+i+", "+j);
-            }
-        }
-        int lastRow = 0;
-        int lastCol = 0;
         chessBoard.setPlayers(me,notMe);
         chessBoard.changeTiles(me.placePieces(chessBoard.getTiles()));
         chessBoard.changeTiles(notMe.placePieces(chessBoard.getTiles()));
@@ -55,7 +43,6 @@ public class RunWindow extends Application {
         GridPane additionalInfoGrid = new GridPane();
         GridPane whitePieces = new GridPane();
         GridPane blackPieces = new GridPane();
-        GridPane board = new GridPane();
         HBox layout = new HBox(75,chatGrid,boardAreaGrid,additionalInfoGrid);
         layout.setMargin(chatGrid,new Insets(25,25,25,25));
         layout.setMargin(boardAreaGrid,new Insets(25,25,25,25));
@@ -71,146 +58,25 @@ public class RunWindow extends Application {
         chatGrid.add(new Rectangle(300,750),0,0,1,1);
         additionalInfoGrid.add(new Rectangle(300,750),0,0);
 
-        for(int i = 0; i < 8; i++)
+        for(int row = 0; row < 8; row++)
         {
-            for(int j = 0; j<8; j++)
+            for(int col = 0; col < 8; col++)
             {
-
-                c=Color.rgb(13, 97, 35);
-                if((7*i+j)%2==0)
+                if((7*row+col)%2==0)
+                    c=Color.rgb(13, 97, 35);
+                else
                     c=Color.rgb(221, 224, 162);
-                if(figureOutWhatPeice(i,j,chessBoard.getTiles())!=null)
+
+                if(figureOutWhatPeice(row,col,chessBoard.getTiles())!=null)
                 {
-//                    System.out.println("we made it here");
-                    ImageView temp = new ImageView(chessBoard.getTiles()[i][j].pieces[0].images[0]);
-                    temp.setOnMouseClicked(e ->{
-                        int newRow = (int)((e.getSceneX()-450)/75);
-                        int newCol = (int)((e.getSceneY()-100)/75);
-                        if(newRow == selectedRow && newCol==selectedCol)
-                        {
-                            selectedRow=-1;
-                            selectedCol=-1;
-                            System.out.println("unselected");
-                        } else if(selectedRow!=-1 && selectedCol != -1)
-                        {
-                            System.out.println("trying to move: "+selectedRow+"|"+selectedCol + "to "+ newRow+"|"+newCol);
-                            try
-                            {
-                                System.out.println(selectedRow+"|"+selectedCol);
-                                if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
-                                {
-                                    if(imageSave==null)
-                                    {
-                                        System.out.println("image save is null");
-                                    }
-                                    chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75),chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
-                                    System.out.println("move works?");
-
-                                    board.getChildren().remove(imageSave);
-
-
-                                    ObservableList<Node> childrens = board.getChildren();
-
-                                    for(Node node : childrens) {
-                                        if(node instanceof ImageView && board.getRowIndex(node) == newCol-1 && board.getColumnIndex(node) == newRow) {
-
-                                            board.getChildren().remove(node);
-                                            break;
-                                        }
-                                    }
-                                    board.add(new Rectangle(75,75,c),newRow,newCol+1);
-                                    board.add(imageSave,newRow,newCol+1);
-
-
-                                }else
-                                {
-                                    System.out.println("no peice here");
-
-                                }
-
-                            }catch(Exception ex){
-                                System.out.println("error found in the image lambda for figure out what peice not being null :)");
-                                ex.printStackTrace();
-                            }
-                            selectedRow=-1;
-                            selectedCol=-1;
-                        } else
-                        {
-                            selectedRow = newRow; selectedCol = newCol;
-                            imageSave=temp;
-                            System.out.println("selected");
-                        }
-
-
-
-//                        System.out.println("hi 1");
-                    });
-
-                    board.add(temp,j,8-i,1,1);
+                    ChessFigure piece = new ChessFigure(chessBoard.getTiles()[row][col].pieces[0]);
+                    board.add(piece,col,row,1,1);
                 }else
-                {////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    Rectangle temp = new Rectangle(75,75,c);
-                    temp.setOnMouseClicked(e -> {
-                        int newRow = (int)((e.getSceneX()-450)/75);
-                        int newCol = (int)((e.getSceneY()-100)/75);
-                        if(newRow == selectedRow && newCol==selectedCol)
-                        {
-                            selectedRow=-1;
-                            selectedCol=-1;
-                            System.out.println("unselected");
-                        } else if(selectedRow!=-1 && selectedCol != -1)
-                        {
-                            System.out.println("trying to move: "+selectedRow+"|"+selectedCol + "to "+ newRow+"|"+newCol);
-                            try
-                            {
-                                System.out.println(selectedRow+"|"+selectedCol);
-                                if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
-                                {
-                                    if(imageSave==null)
-                                    {
-                                        System.out.println("image save is null");
-                                    }
-                                    chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),(int)((e.getSceneX()-450)/75),(int)(1+(e.getSceneY()-100)/75),chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
-                                    System.out.println("move works?");
-
-                                    board.getChildren().remove(imageSave);
-
-
-                                    ObservableList<Node> childrens = board.getChildren();
-
-                                    for(Node node : childrens) {
-                                        if(node instanceof ImageView && board.getRowIndex(node) == newCol-1 && board.getColumnIndex(node) == newRow) {
-
-                                            board.getChildren().remove(node);
-                                            break;
-                                        }
-                                    }
-                                    board.add(new Rectangle(75,75,c),newRow,newCol+1);
-                                    board.add(imageSave,newRow,newCol+1);
-
-
-                                }else
-                                {
-                                    System.out.println("no peice here");
-
-                                }
-
-                            }catch(Exception ex){
-                                System.out.println("error found in the rect lambda for figure out what peice not being null :)");
-                                ex.printStackTrace();
-                            }
-                            selectedRow=-1;
-                            selectedCol=-1;
-                        } else
-                        {
-                            selectedRow = newRow; selectedCol = newCol;
-                            System.out.println("selected");
-                        }
-                    });
-                    board.add(temp,j,8-i,1,1);
+                {
+                    Rectangle temp = new Rectangle(75,75, c);
+                    temp.setOnMouseClicked(this::onMouseClickOnSquare);
+                    board.add(temp,col,row,1,1);
                 }
-
-
             }
         }
 
@@ -223,17 +89,15 @@ public class RunWindow extends Application {
         //Setting title to the Stage7
         stage.setTitle("chessboard coming soon");
 
-        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-//                System.out.println("mouse click detected! "+event.getSceneX()+"|"+event.getSceneY());
-                if(event.getSceneX()>=450&&event.getSceneX()<=1050&&event.getSceneY()>=100&&event.getSceneY()<=700)
-                {
-                    System.out.println("the cords are: "+(int)(event.getSceneX()-450)/75+","+(int)(event.getSceneY()-100)/75);
-
-                }
-            }
-        });
+//        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                if(event.getSceneX()>=450&&event.getSceneX()<=1050&&event.getSceneY()>=100&&event.getSceneY()<=700)
+//                {
+//                    System.out.println("the cords are: "+(int)(event.getSceneX()-450)/75+","+(int)(event.getSceneY()-100)/75);
+//                }
+//            }
+//        });
 
 
 
@@ -243,25 +107,150 @@ public class RunWindow extends Application {
         //Displaying the contents of the stage
         stage.show();
 
-
-
     }
+
+    private void onMouseClickOnSquare(MouseEvent e) {
+        int newCol = (int)((e.getSceneX()-450)/75);
+        int newRow = (int)((e.getSceneY()-100)/75);
+        if(newRow == selectedRow && newCol==selectedCol)
+        {
+            selectedRow=-1;
+            selectedCol=-1;
+            System.out.println("unselected");
+        } else if(selectedRow!=-1 && selectedCol != -1)
+        {
+            System.out.println("Trying to move: {"+selectedRow+","+selectedCol+"} to {" + newRow+","+newCol +'}');
+            try
+            {
+                if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
+                {
+                    if(movingPieceImage == null)
+                    {
+                        System.err.println("We don't have a piece to move ???");
+                    }
+
+                    // modifying the model
+                    chessBoard.dump();
+                    chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),newRow,newCol,chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
+                    System.out.println("Before move works?");
+                    chessBoard.dump();
+
+                    board.getChildren().remove(movingPieceImage);
+
+                    for(Node node : board.getChildren()) {
+                        if(node instanceof ChessFigure && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol) {
+                            board.getChildren().remove(node);
+                            break;
+                        }
+                    }
+                    board.add(new Rectangle(75,75,c),newCol,newRow);
+                    board.add(movingPieceImage,newCol,newRow);
+                }else
+                {
+                    System.out.println("Square has no piece - nothing to do.");
+                }
+
+            }catch(Exception ex){
+                System.out.println("error found in the rect lambda for figure out what peice not being null :)");
+                ex.printStackTrace();
+            }
+            selectedRow=-1;
+            selectedCol=-1;
+        } else
+        {
+            selectedRow = newRow; selectedCol = newCol;
+            System.out.println("selected");
+        }
+    }
+
+
     public static void main(String args[]){
         launch(args);
     }
 
-    public static Image figureOutWhatPeice(int i, int j, Square[][] t)
+    public static Image figureOutWhatPeice(int row, int col, Square[][] t)
     {
-//        System.out.println("i am being useful");
-        if(t[i][j].hasAPiece())
+        if(t[row][col].hasAPiece())
         {
-//            System.out.println("image?");
-            return t[i][j].pieces[0].images[0];
+            return t[row][col].pieces[0].images[0];
         }
         return null;
     }
 
 
+    class ChessFigure extends ImageView {
+        final ChessPiece chessPiece;
+
+        ChessFigure(ChessPiece chessPiece) {
+            super(chessPiece.images[0]);
+            this.chessPiece = chessPiece;
+
+            setOnMouseClicked(this::onMouseClickOnPiece);
+        }
+
+        private void onMouseClickOnPiece(MouseEvent e) {
+            int newCol = (int)((e.getSceneX()-450)/75);
+            int newRow = (int)((e.getSceneY()-100)/75);
+            System.out.println("Clicked on row=" + newRow + ", col=" + newCol);
+
+            if(newRow == selectedRow && newCol==selectedCol)
+            {
+                selectedRow=-1;
+                selectedCol=-1;
+            } else if(selectedRow!=-1 && selectedCol != -1)
+            {
+                System.out.println("Trying to move: {"+selectedRow+","+selectedCol+"} to {" + newRow+","+newCol +'}');
+                try
+                {
+                    System.out.println(selectedRow+"|"+selectedCol);
+                    if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece())
+                    {
+                        if(movingPieceImage ==null)
+                        {
+                            System.out.println("image save is null");
+                        }
+                        chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(
+                                chessBoard.getTiles(),newRow,newCol,chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()) //TODO: refactor
+                        );
+                        System.out.println("After move works?");
+                        chessBoard.dump();
+
+                        board.getChildren().remove(movingPieceImage);
+
+
+                        for(Node node : board.getChildren()) {
+                            if(node instanceof ChessFigure && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol) {
+                                board.getChildren().remove(node);
+                                break;
+                            }
+                        }
+                        board.add(new Rectangle(75,75,c),newCol,newRow);
+                        board.add(movingPieceImage,newCol,newRow);
+                    }else
+                    {
+                        System.out.println("no peice here");
+
+                    }
+
+                }catch(Exception ex){
+                    System.out.println("error found in the image lambda for figure out what peice not being null :)");
+                    ex.printStackTrace();
+                }
+                selectedRow=-1;
+                selectedCol=-1;
+            } else
+            {
+                System.out.println("Preparing to move a piece " + this);
+                selectedRow = newRow; selectedCol = newCol;
+                movingPieceImage = this;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return chessPiece.toString();
+        }
+    }
 
 
 }
