@@ -23,7 +23,7 @@ public class RunWindow extends Application {
     int selectedCol=-1;
     int selectedRow=-1;
     ImageView movingPieceImage;
-    Color c;
+
 
     private final BoardObj chessBoard = new BoardObj(false);
     private final GridPane board = new GridPane();
@@ -62,20 +62,16 @@ public class RunWindow extends Application {
         {
             for(int col = 0; col < 8; col++)
             {
-                if((7*row+col)%2==0)
-                    c=Color.rgb(13, 97, 35);
-                else
-                    c=Color.rgb(221, 224, 162);
+                Color c = getColor(row, col);
+
+                Rectangle temp = new Rectangle(75,75, c);
+                temp.setOnMouseClicked(this::onMouseClickOnSquare);
+                board.add(temp,col,row,1,1);
 
                 if(figureOutWhatPeice(row,col,chessBoard.getTiles())!=null)
                 {
                     ChessFigure piece = new ChessFigure(chessBoard.getTiles()[row][col].pieces[0]);
                     board.add(piece,col,row,1,1);
-                }else
-                {
-                    Rectangle temp = new Rectangle(75,75, c);
-                    temp.setOnMouseClicked(this::onMouseClickOnSquare);
-                    board.add(temp,col,row,1,1);
                 }
             }
         }
@@ -107,6 +103,13 @@ public class RunWindow extends Application {
         //Displaying the contents of the stage
         stage.show();
 
+    }
+
+    private static Color getColor (int row, int col) {
+        if((7* row + col)%2==0)
+            return Color.rgb(221, 224, 162); // white
+        else
+            return Color.rgb(13, 97, 35); // black
     }
 
     private void onMouseClickOnSquare(MouseEvent e) {
@@ -143,7 +146,7 @@ public class RunWindow extends Application {
                             break;
                         }
                     }
-                    board.add(new Rectangle(75,75,c),newCol,newRow);
+                    board.add(new Rectangle(75,75, getColor(newCol, newRow)),newCol,newRow);
                     board.add(movingPieceImage,newCol,newRow);
                 }else
                 {
@@ -224,7 +227,7 @@ public class RunWindow extends Application {
                                 break;
                             }
                         }
-                        board.add(new Rectangle(75,75,c),newCol,newRow);
+                        board.add(new Rectangle(75,75, getColor(newCol, newRow)),newCol,newRow);
                         board.add(movingPieceImage,newCol,newRow);
                     }else
                     {

@@ -30,8 +30,8 @@ public class Player {
             t[0][0].addPiece(new Rook(t[0][0],color,'█',this),this);
             t[0][1].addPiece(new Knight(t[0][1],color, 'Г',this),this);
             t[0][2].addPiece(new Bishop(t[0][2],color, 'i',this),this);
-            t[0][3].addPiece(new Queen(t[0][3],color,'Q',this),this);
-            t[0][4].addPiece(new King(t[0][4],color, 'K',this),this);
+            t[0][3].addPiece(new King(t[0][3],color, 'K',this),this);
+            t[0][4].addPiece(new Queen(t[0][4],color,'Q',this),this);
             t[0][5].addPiece(new Bishop(t[0][5],color, 'i',this),this);
             t[0][6].addPiece(new Knight(t[0][6],color, 'Г',this),this);
             t[0][7].addPiece(new Rook(t[0][7],color,'█',this),this);
@@ -47,8 +47,8 @@ public class Player {
             t[7][0].addPiece(new Rook(t[7][0],color,'█',this),this);
             t[7][1].addPiece(new Knight(t[7][1],color,'Г',this),this);
             t[7][2].addPiece(new Bishop(t[7][2],color,'i',this),this);
-            t[7][3].addPiece(new Queen(t[7][3],color,'Q',this),this);
-            t[7][4].addPiece(new King(t[7][4],color,'K',this),this);
+            t[7][3].addPiece(new King(t[7][3],color,'K',this),this);
+            t[7][4].addPiece(new Queen(t[7][4],color,'Q',this),this);
             t[7][5].addPiece(new Bishop(t[7][5],color,'i',this),this);
             t[7][6].addPiece(new Knight(t[7][6],color,'Г',this),this);
             t[7][7].addPiece(new Rook(t[7][7],color,'█',this),this);
