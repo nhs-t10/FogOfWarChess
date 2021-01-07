@@ -15,13 +15,7 @@ public class Player {
 
     public void removePiece(int deadRow, int deadCol)
     {
-        for(ChessPiece p: pieces)
-        {
-            if(deadRow==p.currentPos.row&&deadCol==p.currentPos.column)
-            {
-                pieces.remove(p);
-            }
-        }
+        pieces.removeIf(p -> deadRow == p.currentPos.row && deadCol == p.currentPos.column);
     }
 
     public Square[][] placePieces(Square[][] t)

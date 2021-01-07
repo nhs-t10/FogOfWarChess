@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 //IMPORTANT: COL THEN ROW FOR GUI STUFF, ROW THEN COL FOR NON GUI STUFF
 public class RunWindow extends Application {
 
+    Color TEMP_COLOR = Color.rgb(255,255,255);
     public static final int CELL_SIZE = 75;
     public static final int LABEL_SIZE = 20;
     public static final int BOARD_SIZE = 8*CELL_SIZE + 2*LABEL_SIZE;
@@ -70,11 +71,11 @@ public class RunWindow extends Application {
         boardAreaGrid.add(whitePieces,0,0,1,1);
         boardAreaGrid.add(pane,0,1,1,1);
         boardAreaGrid.add(blackPieces,0,2,1,1);
-        whitePieces.add(new Rectangle(BOARD_SIZE,CELL_SIZE),0,0,1,1);
-        blackPieces.add(new Rectangle(BOARD_SIZE,CELL_SIZE),0,0,1,1);
+        whitePieces.add(new Rectangle(BOARD_SIZE,CELL_SIZE,TEMP_COLOR),0,0,1,1);
+        blackPieces.add(new Rectangle(BOARD_SIZE,CELL_SIZE,TEMP_COLOR),0,0,1,1);
         boardAreaGrid.setHgap(40);
-        chatGrid.add(new Rectangle(300,10*CELL_SIZE),0,0,1,1);
-        additionalInfoGrid.add(new Rectangle(300,10*CELL_SIZE),0,0);
+        chatGrid.add(new Rectangle(300,10*CELL_SIZE,TEMP_COLOR),0,0,1,1);
+        additionalInfoGrid.add(new Rectangle(300,10*CELL_SIZE,TEMP_COLOR),0,0);
 
         for(int row = 0; row < 8; row++)
         {

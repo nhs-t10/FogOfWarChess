@@ -20,10 +20,10 @@ public class Knight extends ChessPiece{
             }
         }
 //        System.out.println("pos moves "+theMoves.size());
-        for(int[]i:theMoves)
-        {
-//            System.out.println(i[0]+", "+i[1]);
-        }
+//        for(int[]i:theMoves)
+//        {
+////            System.out.println(i[0]+", "+i[1]);
+//        }
         return theMoves;
 
     }//so we have 3 cases: 6 6 2 2,   7 7 1 1, the cases between

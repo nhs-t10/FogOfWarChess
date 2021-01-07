@@ -55,6 +55,7 @@ abstract class ChessPiece {
         {
             //idk lol but i imagine something will eventually go here lmao
             System.out.println("exception in move");
+            e.printStackTrace();
             return backupT;
         }
         for(ChessPiece p: owner.pieces)
