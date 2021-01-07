@@ -349,6 +349,6 @@ public class RunWindow extends Application {
         if((7* row + col)%2==0)
             return Color.rgb(125, 125, 121); // white
         else
-            return Color.rgb(63, 69, 65); // black
+            return Color.rgb(103, 109, 105); // black
     }
 }
