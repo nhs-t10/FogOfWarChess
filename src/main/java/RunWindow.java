@@ -140,6 +140,20 @@ public class RunWindow extends Application {
                 if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece()&&chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].pieceColor==turn&&movingPieceImage!=null)
                 {
 
+                    boolean garbageCode =false;
+                    for(int[] i: chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()))
+                    {
+                        if(newRow==i[0]&&newCol==i[1])
+                        {
+                            garbageCode=true;
+                            break;
+                        }
+                    }
+                    if(!garbageCode)
+                    {
+                        System.err.println("YOU FUCKIN IDIOT U MOVED WRONG ITS LITERALLY CHESS NOT HARD TO MOVE CORRECTLY KEKW");
+                        throw new Exception("illegal move u dumb bitch ahahahahahahahahahahahhahahahahahah");
+                    }
 
                     // modifying the model
                     chessBoard.dump();
@@ -255,6 +269,20 @@ public class RunWindow extends Application {
                     if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece()&&chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].pieceColor==turn&&movingPieceImage!=null)
                     {
 
+                        boolean garbageCode =false;
+                        for(int[] i: chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()))
+                        {
+                            if(newRow==i[0]&&newCol==i[1])
+                            {
+                                garbageCode=true;
+                                break;
+                            }
+                        }
+                        if(!garbageCode)
+                        {
+                            System.err.println("YOU FUCKIN IDIOT U MOVED WRONG ITS LITERALLY CHESS NOT HARD TO MOVE CORRECTLY KEKW");
+                            throw new Exception("illegal move u dumb bitch ahahahahahahahahahahahhahahahahahah");
+                        }
                         chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(
                                 chessBoard.getTiles(),newRow,newCol,chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()) //TODO: refactor
                         );
