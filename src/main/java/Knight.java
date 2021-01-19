@@ -1,22 +1,36 @@
 import java.util.ArrayList;
+import java.util.List;
 
-public class Knight extends ChessPiece{
+public class Knight extends ChessPiece {
 
-    public Knight(Square startingPos, boolean color, char code,Player owner)
-    {
-        super(startingPos,color,3,code,"kt", owner);
+    public Knight(Square startingPos, boolean color, char code, Player owner) {
+        super(startingPos, color, 3, code, "kt", owner);
     }
 
-    public ArrayList<int[]> possibleMoves(Square[][]t)
-    {
+    public List<Coordinate> possibleMoves(Square[][] t) {
         int row = this.currentPos.row;
         int col = this.currentPos.column;
-        int[][] newPos = new int[][]{new int[]{row+2,col+1},new int[]{row+2,col-1},new int[]{row+1,col+2},new int[]{row+1,col-2},new int[]{row-1,col+2},new int[]{row-1,col-2},new int[]{row-2,col+1},new int[]{row-2,col-1}};
-        ArrayList<int[]>theMoves = new ArrayList<>();
-        for(int[]i:newPos){
-            if(i[0]<8&&i[0]>-1&&i[1]>-1&&i[1]<8&&(!t[i[0]][i[1]].hasAPiece()||(t[i[0]][i[1]].hasAPiece()&&t[i[0]][i[1]].pieces[0].pieceColor!=this.pieceColor)))
-            {
-                theMoves.add(i);
+
+
+        Coordinate[] newPos = new Coordinate[] {
+                new Coordinate(row + 2, col + 1),
+                new Coordinate(row + 2, col - 1),
+                new Coordinate(row + 1, col + 2),
+                new Coordinate(row + 1, col - 2),
+                new Coordinate(row - 1, col + 2), 
+                new Coordinate(row - 1, col - 2), 
+                new Coordinate(row - 2, col + 1), 
+                new Coordinate(row - 2, col - 1)};
+        
+
+        List<Coordinate> theMoves = new ArrayList<>();
+        for (Coordinate coordinate : newPos) {
+            if (coordinate.row < 8 && coordinate.row > -1 &&
+                coordinate.col > -1 && coordinate.col < 8 &&
+                    ( !t[coordinate.row][coordinate.col].hasAPiece() ||
+                      t[coordinate.row][coordinate.col].hasAPiece() &&
+                      t[coordinate.row][coordinate.col].pieces[0].pieceColor != this.pieceColor)) {
+                theMoves.add(coordinate);
             }
         }
 //        System.out.println("pos moves "+theMoves.size());

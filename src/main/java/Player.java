@@ -63,12 +63,12 @@ public class Player {
         for(ChessPiece p:pieces)
         {
 //            System.out.println(p.representation);
-            for(int[] moves: p.possibleMoves(board.getTiles()))
+            for(Coordinate move : p.possibleMoves(board.getTiles()))
             {
 //                System.out.println("moves of o "+moves[0]+"  |  moves of 1 "+ moves[1]);
-                if(!canSeeSquare[moves[0]][moves[1]])
+                if(!canSeeSquare[move.row][move.col])
                 {
-                    canSeeSquare[moves[0]][moves[1]]=true;
+                    canSeeSquare[move.row][move.col]=true;
                 }
             }
             if(!canSeeSquare[p.currentPos.row][p.currentPos.column])

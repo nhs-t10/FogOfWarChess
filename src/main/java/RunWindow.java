@@ -18,15 +18,15 @@ import javafx.stage.Stage;
 //IMPORTANT: COL THEN ROW FOR GUI STUFF, ROW THEN COL FOR NON GUI STUFF
 public class RunWindow extends Application {
 
-    public static final Color TEMP_COLOR = Color.rgb(244,244,244);
+    public static final Color TEMP_COLOR = Color.rgb(244, 244, 244);
     public static final int CELL_SIZE = 75;
     public static final int LABEL_SIZE = 20;
-    public static final int BOARD_SIZE = 8*CELL_SIZE + 2*LABEL_SIZE;
-    private static final DropShadow DS = new DropShadow( 20, Color.YELLOW );
+    public static final int BOARD_SIZE = 8 * CELL_SIZE + 2 * LABEL_SIZE;
+    private static final DropShadow DS = new DropShadow(20, Color.YELLOW);
     final int X_DIM = 1500;
     final int Y_DIM = 800; //750 is height of stuff in y :)
-    int selectedCol=-1;
-    int selectedRow=-1;
+    int selectedCol = -1;
+    int selectedRow = -1;
     ImageView movingPieceImage;
 
     boolean turn = true;
@@ -38,10 +38,10 @@ public class RunWindow extends Application {
     @Override
     public void start(Stage stage) {
         //Creating a Path
-        Player me = new Player(true,chessBoard);
-        Player notMe = new Player(false,chessBoard);
+        Player me = new Player(true, chessBoard);
+        Player notMe = new Player(false, chessBoard);
         chessBoard.setBoard();
-        chessBoard.setPlayers(me,notMe);
+        chessBoard.setPlayers(me, notMe);
         chessBoard.changeTiles(me.placePieces(chessBoard.getTiles()));
         chessBoard.changeTiles(notMe.placePieces(chessBoard.getTiles()));
 
@@ -50,10 +50,10 @@ public class RunWindow extends Application {
         GridPane additionalInfoGrid = new GridPane();
         GridPane whitePieces = new GridPane();
         GridPane blackPieces = new GridPane();
-        HBox layout = new HBox(CELL_SIZE,chatGrid,boardAreaGrid,additionalInfoGrid);
-        HBox.setMargin(chatGrid,new Insets(25,25,25,25));
-        HBox.setMargin(boardAreaGrid,new Insets(25,25,25,25));
-        HBox.setMargin(additionalInfoGrid,new Insets(25,25,25,25));
+        HBox layout = new HBox(CELL_SIZE, chatGrid, boardAreaGrid, additionalInfoGrid);
+        HBox.setMargin(chatGrid, new Insets(25, 25, 25, 25));
+        HBox.setMargin(boardAreaGrid, new Insets(25, 25, 25, 25));
+        HBox.setMargin(additionalInfoGrid, new Insets(25, 25, 25, 25));
 
         BorderPane pane = new BorderPane();
         GridPane boardWithLabels = new GridPane();
@@ -68,49 +68,42 @@ public class RunWindow extends Application {
         pane.setCenter(boardWithLabels);
 
 
-        boardAreaGrid.add(whitePieces,0,0,1,1);
-        boardAreaGrid.add(pane,0,1,1,1);
-        boardAreaGrid.add(blackPieces,0,2,1,1);
-        whitePieces.add(new Rectangle(BOARD_SIZE,CELL_SIZE,TEMP_COLOR),0,0,1,1);
-        blackPieces.add(new Rectangle(BOARD_SIZE,CELL_SIZE,TEMP_COLOR),0,0,1,1);
+        boardAreaGrid.add(whitePieces, 0, 0, 1, 1);
+        boardAreaGrid.add(pane, 0, 1, 1, 1);
+        boardAreaGrid.add(blackPieces, 0, 2, 1, 1);
+        whitePieces.add(new Rectangle(BOARD_SIZE, CELL_SIZE, TEMP_COLOR), 0, 0, 1, 1);
+        blackPieces.add(new Rectangle(BOARD_SIZE, CELL_SIZE, TEMP_COLOR), 0, 0, 1, 1);
         boardAreaGrid.setHgap(40);
-        chatGrid.add(new Rectangle(300,10*CELL_SIZE,TEMP_COLOR),0,0,1,1);
-        additionalInfoGrid.add(new Rectangle(300,10*CELL_SIZE,TEMP_COLOR),0,0);
+        chatGrid.add(new Rectangle(300, 10 * CELL_SIZE, TEMP_COLOR), 0, 0, 1, 1);
+        additionalInfoGrid.add(new Rectangle(300, 10 * CELL_SIZE, TEMP_COLOR), 0, 0);
 
-        for(int row = 0; row < 8; row++)
-        {
-            for(int col = 0; col < 8; col++)
-            {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
                 Color c = getColor(row, col);
 
-                Rectangle temp = new Rectangle(CELL_SIZE,CELL_SIZE, c);
+                Rectangle temp = new Rectangle(CELL_SIZE, CELL_SIZE, c);
                 temp.setOnMouseClicked(this::onMouseClickOnSquare);
-                board.add(temp,col,row,1,1);
+                board.add(temp, col, row, 1, 1);
 
-                if(figureOutWhatPeice(row,col,chessBoard.getTiles())!=null)
-                {
+                if (figureOutWhatPeice(row, col, chessBoard.getTiles()) != null) {
                     ChessFigure piece = new ChessFigure(chessBoard.getTiles()[row][col].pieces[0]);
-                    board.add(piece,col,row,1,1);
+                    board.add(piece, col, row, 1, 1);
                 }
             }
         }
-        if(applyFog)
-        {
+        if (applyFog) {
             boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
-            for(int row = 0; row < 8; row++)
-            {
-                for(int col = 0; col<8;col++)
-                {
-                    if(!fogSquares[row][col])
-                    {
-                        board.add(new FogRect(col,row),col,row);
+            for (int row = 0; row < 8; row++) {
+                for (int col = 0; col < 8; col++) {
+                    if (!fogSquares[row][col]) {
+                        board.add(new FogRect(col, row), col, row);
                     }
                 }
             }
         }
 
         //Creating a scene object
-        Scene scene = new Scene(layout, X_DIM , Y_DIM, TEMP_COLOR);
+        Scene scene = new Scene(layout, X_DIM, Y_DIM, TEMP_COLOR);
 
         //Setting title to the Stage7
         stage.setTitle("chessboard coming soon");
@@ -124,118 +117,102 @@ public class RunWindow extends Application {
     }
 
     private void onMouseClickOnSquare(MouseEvent e) {
-        int newCol = (int)((e.getSceneX()-450-LABEL_SIZE)/CELL_SIZE);
-        int newRow = (int)((e.getSceneY()-100-LABEL_SIZE)/CELL_SIZE);
-        if(newRow == selectedRow && newCol==selectedCol)
-        {
-            selectedRow=-1;
-            selectedCol=-1;
-            movingPieceImage=null;
+        int newCol = (int) ((e.getSceneX() - 450 - LABEL_SIZE) / CELL_SIZE);
+        int newRow = (int) ((e.getSceneY() - 100 - LABEL_SIZE) / CELL_SIZE);
+        if (newRow == selectedRow && newCol == selectedCol) {
+            selectedRow = -1;
+            selectedCol = -1;
+            movingPieceImage = null;
             System.out.println("unselected");
-        } else if(selectedRow!=-1 && selectedCol != -1)
-        {
-            System.out.println("Trying to move: {"+selectedRow+","+selectedCol+"} to {" + newRow+","+newCol +'}');
-            try
-            {
-                if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece()&&chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].pieceColor==turn&&movingPieceImage!=null)
-                {
+        } else if (selectedRow != -1 && selectedCol != -1) {
+            System.out.println("Trying to move: {" + selectedRow + "," + selectedCol + "} to {" + newRow + "," + newCol + '}');
+            try {
+                if (chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece() && chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].pieceColor == turn && movingPieceImage != null) {
 
-                    boolean garbageCode =false;
-                    for(int[] i: chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()))
-                    {
-                        if(newRow==i[0]&&newCol==i[1])
-                        {
-                            garbageCode=true;
+                    boolean garbageCode = false;
+                    for (Coordinate c : chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles())) {
+                        if (newRow == c.row && newCol == c.col) {
+                            garbageCode = true;
                             break;
                         }
                     }
-                    if(!garbageCode)
-                    {
-                        System.err.println("YOU FUCKIN IDIOT U MOVED WRONG ITS LITERALLY CHESS NOT HARD TO MOVE CORRECTLY KEKW");
-                        throw new Exception("illegal move u dumb bitch ahahahahahahahahahahahhahahahahahah");
+                    if (!garbageCode) {
+                        System.err.println("This move is illegal");
+                        throw new Exception("illegal move");
                     }
 
                     // modifying the model
                     chessBoard.dump();
-                    chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(),newRow,newCol,chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
+                    chessBoard.tiles = chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(chessBoard.getTiles(), newRow, newCol, chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()));
                     System.out.println("Before move works?");
                     chessBoard.dump();
 
                     board.getChildren().remove(movingPieceImage);
 
-                    for(Node node : board.getChildren()) {
-                        if(node instanceof ChessFigure && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol) {
+                    for (Node node : board.getChildren()) {
+                        if (node instanceof ChessFigure && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol) {
                             board.getChildren().remove(node);
                             break;
                         }
                     }
-                    board.add(new Rectangle(CELL_SIZE,CELL_SIZE, getColor(newCol, newRow)),newCol,newRow);
-                    board.add(movingPieceImage,newCol,newRow);
+                    board.add(new Rectangle(CELL_SIZE, CELL_SIZE, getColor(newCol, newRow)), newCol, newRow);
+                    board.add(movingPieceImage, newCol, newRow);
                     movingPieceImage.setEffect(null);
 
                     turn = !turn;
 
 
-
-                    if(applyFog)
-                    {
+                    if (applyFog) {
                         System.err.println("WE REMOVIN");
                         board.getChildren().removeIf(node -> node instanceof FogRect);
 
 
-
                         boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
-                        for(int row = 0; row < 8; row++)
-                        {
-                            for(int col = 0; col<8;col++)
-                            {
-                                if(!fogSquares[row][col])
-                                {
-                                    board.add(new FogRect(row,col),col,row);
+                        for (int row = 0; row < 8; row++) {
+                            for (int col = 0; col < 8; col++) {
+                                if (!fogSquares[row][col]) {
+                                    board.add(new FogRect(row, col), col, row);
                                 }
                             }
                         }
                     }
-                }else
-                {
+                } else {
                     System.out.println("Square has no piece - nothing to do.");
                 }
 
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 System.out.println("error found in the rect lambda for figure out what peice not being null :)");
                 ex.printStackTrace();
             }
-            selectedRow=-1;
-            selectedCol=-1;
-            movingPieceImage=null;
-        } else
-        {
-            selectedRow = newRow; selectedCol = newCol;
+            selectedRow = -1;
+            selectedCol = -1;
+            movingPieceImage = null;
+        } else {
+            selectedRow = newRow;
+            selectedCol = newCol;
             System.out.println("selected");
         }
     }
 
 
-    public static void main(String [] args){
+    public static void main(String[] args) {
         launch(args);
     }
 
-    public static Image figureOutWhatPeice(int row, int col, Square[][] t)
-    {
-        if(t[row][col].hasAPiece())
-        {
+    public static Image figureOutWhatPeice(int row, int col, Square[][] t) {
+        if (t[row][col].hasAPiece()) {
             return t[row][col].pieces[0].images[0];
         }
         return null;
     }
+
     class FogRect extends Rectangle {
 
-        FogRect(int row, int col)
-        {
-            super(CELL_SIZE,CELL_SIZE,getFogColor(col,row));
+        FogRect(int row, int col) {
+            super(CELL_SIZE, CELL_SIZE, getFogColor(col, row));
         }
-        FogRect()
-        {
+
+        FogRect() {
             super();
         }
     }
@@ -251,40 +228,33 @@ public class RunWindow extends Application {
         }
 
         private void onMouseClickOnPiece(MouseEvent e) {
-            int newCol = (int)((e.getSceneX()-450-LABEL_SIZE)/CELL_SIZE);
-            int newRow = (int)((e.getSceneY()-100-LABEL_SIZE)/CELL_SIZE);
+            int newCol = (int) ((e.getSceneX() - 450 - LABEL_SIZE) / CELL_SIZE);
+            int newRow = (int) ((e.getSceneY() - 100 - LABEL_SIZE) / CELL_SIZE);
             System.out.println("Clicked on row=" + newRow + ", col=" + newCol);
 
-            if(newRow == selectedRow && newCol==selectedCol)
-            {
-                selectedRow=-1;
-                selectedCol=-1;
-                movingPieceImage=null;
-            } else if(selectedRow!=-1 && selectedCol != -1)
-            {
-                System.out.println("Trying to move: {"+selectedRow+","+selectedCol+"} to {" + newRow+","+newCol +'}');
-                try
-                {
-                    System.out.println(selectedRow+"|"+selectedCol);
-                    if(chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece()&&chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].pieceColor==turn&&movingPieceImage!=null)
-                    {
+            if (newRow == selectedRow && newCol == selectedCol) {
+                selectedRow = -1;
+                selectedCol = -1;
+                movingPieceImage = null;
+            } else if (selectedRow != -1 && selectedCol != -1) {
+                System.out.println("Trying to move: {" + selectedRow + "," + selectedCol + "} to {" + newRow + "," + newCol + '}');
+                try {
+                    System.out.println(selectedRow + "|" + selectedCol);
+                    if (chessBoard.getTiles()[selectedRow][selectedCol].hasAPiece() && chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].pieceColor == turn && movingPieceImage != null) {
 
-                        boolean garbageCode =false;
-                        for(int[] i: chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()))
-                        {
-                            if(newRow==i[0]&&newCol==i[1])
-                            {
-                                garbageCode=true;
+                        boolean garbageCode = false;
+                        for (Coordinate c : chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles())) {
+                            if (newRow == c.row && newCol == c.col) {
+                                garbageCode = true;
                                 break;
                             }
                         }
-                        if(!garbageCode)
-                        {
+                        if (!garbageCode) {
                             System.err.println("YOU FUCKIN IDIOT U MOVED WRONG ITS LITERALLY CHESS NOT HARD TO MOVE CORRECTLY KEKW");
                             throw new Exception("illegal move u dumb bitch ahahahahahahahahahahahhahahahahahah");
                         }
-                        chessBoard.tiles=chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(
-                                chessBoard.getTiles(),newRow,newCol,chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()) //TODO: refactor
+                        chessBoard.tiles = chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].move(
+                                chessBoard.getTiles(), newRow, newCol, chessBoard.getTiles()[selectedRow][selectedCol].pieces[0].possibleMoves(chessBoard.getTiles()) //TODO: refactor
                         );
                         System.out.println("After move works?");
                         chessBoard.dump();
@@ -292,57 +262,52 @@ public class RunWindow extends Application {
                         board.getChildren().remove(movingPieceImage);
 
 
-                        for(Node node : board.getChildren()) {
-                            if(node instanceof ChessFigure && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol) {
+                        for (Node node : board.getChildren()) {
+                            if (node instanceof ChessFigure && GridPane.getRowIndex(node) == newRow && GridPane.getColumnIndex(node) == newCol) {
                                 board.getChildren().remove(node);
                                 break;
                             }
                         }
-                        board.add(new Rectangle(CELL_SIZE,CELL_SIZE, getColor(newCol, newRow)),newCol,newRow);
-                        board.add(movingPieceImage,newCol,newRow);
+                        board.add(new Rectangle(CELL_SIZE, CELL_SIZE, getColor(newCol, newRow)), newCol, newRow);
+                        board.add(movingPieceImage, newCol, newRow);
                         movingPieceImage.setEffect(null);
 
                         turn = !turn;
-                        if(applyFog)
-                        {
+                        if (applyFog) {
                             System.err.println("WE REMOVIN");
                             board.getChildren().removeIf(node -> node instanceof FogRect);
 
 
                             boolean[][] fogSquares = chessBoard.getPlayer(turn).calculateVisibleSquares();
-                            for(int row = 0; row < 8; row++)
-                            {
-                                for(int col = 0; col<8;col++)
-                                {
-                                    if(!fogSquares[row][col])
-                                    {
-                                        board.add(new FogRect(col,row),col,row);
+                            for (int row = 0; row < 8; row++) {
+                                for (int col = 0; col < 8; col++) {
+                                    if (!fogSquares[row][col]) {
+                                        board.add(new FogRect(col, row), col, row);
                                     }
                                 }
                             }
                         }
 
-                    }else
-                    {
+                    } else {
                         System.out.println("no peice here");
 
                     }
 
-                }catch(Exception ex){
+                } catch (Exception ex) {
                     System.out.println("error found in the image lambda for figure out what peice not being null :)");
                     ex.printStackTrace();
                 }
-                selectedRow=-1;
-                selectedCol=-1;
-                movingPieceImage=null;
-            } else
-            {
+                selectedRow = -1;
+                selectedCol = -1;
+                movingPieceImage = null;
+            } else {
                 System.out.println("Preparing to move a piece " + this);
-                selectedRow = newRow; selectedCol = newCol;
+                selectedRow = newRow;
+                selectedCol = newCol;
                 movingPieceImage = this;
             }
 
-            this.setEffect( DS );
+            this.setEffect(DS);
         }
 
         @Override
@@ -365,16 +330,15 @@ public class RunWindow extends Application {
         return l;
     }
 
-    private static Color getColor (int row, int col) {
-        if((7* row + col)%2==0)
+    private static Color getColor(int row, int col) {
+        if ((7 * row + col) % 2 == 0)
             return Color.rgb(221, 224, 162); // white
         else
             return Color.rgb(13, 97, 35); // black
     }
 
-    private static Color getFogColor(int row, int col)
-    {
-        if((7* row + col)%2==0)
+    private static Color getFogColor(int row, int col) {
+        if ((7 * row + col) % 2 == 0)
             return Color.rgb(125, 125, 121); // white
         else
             return Color.rgb(103, 109, 105); // black
